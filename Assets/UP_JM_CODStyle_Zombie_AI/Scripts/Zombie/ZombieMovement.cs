@@ -1,0 +1,94 @@
+
+using UnityEngine;
+using UnityEngine.AI;
+
+public class ZombieMovement : MonoBehaviour
+{
+    [SerializeField] Transform target;
+    enum ZombieState {idle, walk, run, attack};
+
+    public bool running;
+    [SerializeField] float attackTriggerDistance = 2.0f;
+
+    [SerializeField] float walkSpeed = 1.8f;
+    [SerializeField] float runSpeed = 4.0f;
+
+    ZombieState currentState;
+    ZombieState previousState;
+
+    NavMeshAgent navMeshAgent;
+    [SerializeField] Animator animator;
+
+    void Awake()
+    {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        currentState = ZombieState.walk;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    void FixedUpdate()
+    {
+        DetermineState();
+    }
+
+    void DetermineState()
+    {
+        if(target == null)
+        {
+            currentState = ZombieState.idle;
+            Debug.LogWarning("Target is null. Zombie will idle until there is a target.");
+            return;
+        }
+
+        float distanceFromTarget = Vector3.Distance(transform.position, target.position);
+
+        if(distanceFromTarget <= attackTriggerDistance)
+        {            
+            currentState = ZombieState.attack;
+        }
+        else if(distanceFromTarget > attackTriggerDistance)
+        {
+            currentState = running ? ZombieState.run : ZombieState.walk;
+        }
+        else
+        {
+            currentState = ZombieState.idle;
+            Debug.LogError("Zombie Determine State defaulted to idle.");
+        }
+
+        HandleStates();
+
+        previousState = currentState;
+    }
+
+    void HandleStates()
+    {
+        switch(currentState)
+        {
+            case ZombieState.idle:
+            navMeshAgent.speed = 0;
+            break;
+
+            case ZombieState.attack:
+            navMeshAgent.speed = 0;
+            navMeshAgent.SetDestination(target.position);
+            break;
+
+            case ZombieState.walk:
+            navMeshAgent.speed = walkSpeed;
+            navMeshAgent.SetDestination(target.position);
+            break;
+
+            case ZombieState.run:
+            navMeshAgent.speed = runSpeed;
+            navMeshAgent.SetDestination(target.position);
+            break;
+        }
+        AnimatorUpdate();
+    }
+
+    void AnimatorUpdate()
+    {
+        animator.SetFloat("moveSpeed", navMeshAgent.velocity.magnitude);
+    }
+}
