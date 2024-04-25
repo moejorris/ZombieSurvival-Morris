@@ -7,11 +7,11 @@ public class PlayerHealth : Health //Player derivative of Health
     [SerializeField] AudioClip damageSound, deathSound; //sound effects played when taking damage and dying.
     AudioSource audioSource;
 
-    public int MaxHealth
+    public float MaxHealth
     {
         get { return maxHealth; }
     }
-    public int Health
+    public float Health
     {
         get{return currentHealth;}
     }
@@ -23,7 +23,7 @@ public class PlayerHealth : Health //Player derivative of Health
         audioSource = GetComponent<AudioSource>();
     }
 
-    public override void TakeDamage(int damageInflicted) //Adds playing the sound and updating the Ui to the base function. Also ensures the script is enabled to stop it from being called after the player is dead.
+    public override void TakeDamage(float damageInflicted) //Adds playing the sound and updating the Ui to the base function. Also ensures the script is enabled to stop it from being called after the player is dead.
     {
         if(enabled) //this script is disabled when the player is paused, either when the game is over or the game is paused. This ensures nothing happens in either case.
         {

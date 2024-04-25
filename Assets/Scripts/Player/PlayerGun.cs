@@ -17,8 +17,10 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [SerializeField] AudioSource audioSource; //Optional
 
     [Header("Ammo Definitions")]
+    [SerializeField] int clipSize; //how much ammo can be held in each magazine
+    [SerializeField] int startingReserveMagazines = 3; //how many reserve magazines of ammo the player has at the start. Replenished on max ammo.
     [SerializeField] int currentAmmo; //How much ammo is currently available
-    [SerializeField] int maxAmmo; //how much ammo will be available at the start and after reloading
+    [SerializeField] int currentReserveAmmo; //how much ammo there is left
 
     [Header("Shooting Definitions")]
     [SerializeField] bool fullAuto;
@@ -41,7 +43,9 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [SerializeField] string weaponName;
     [SerializeField] Sprite activeAmmoSprite;
     [SerializeField] Sprite inactiveAmmoSprite;
-    [SerializeField] Sprite crosshair;
+    [Header("Wall Buy References")]
+    [SerializeField] public GameObject displayModel;
+    // [SerializeField] Sprite crosshair; crosshair is no longer controlled by weapon.
     // [SerializeField] UiAmmoController uiAmmoController; //Reference to the UiAmmoController to tell it when to update.
 
     bool canShoot;
@@ -59,7 +63,8 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     void Start()
     {
 
-        currentAmmo = maxAmmo;
+        currentAmmo = clipSize;
+        currentReserveAmmo = clipSize * startingReserveMagazines;
         canShoot = true;
         UpdateUi();
     }
@@ -116,38 +121,13 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         }
 
         UpdateBounceAnimationSpeed();
-
-        UpdateWeaponRotation();
-    }
-
-    void UpdateWeaponRotation()
-    {
-        Vector3 lookAtTarget;
-        Vector3 lerpRotation;
-
-        RaycastHit hit;
-
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxDistance, shootableObjects))
-        {
-            lookAtTarget = hit.point;
-        }
-        else
-        {
-            lookAtTarget = transform.forward;
-        }
-        Vector3 currentRotation = transform.eulerAngles;
-        transform.LookAt(lookAtTarget);
-        Vector3 lookAtAngles = transform.eulerAngles;
-        transform.eulerAngles = currentRotation;
-        lerpRotation = Vector3.Lerp(transform.eulerAngles, lookAtAngles, Time.deltaTime);
-        transform.eulerAngles = lerpRotation;
     }
 
     void UpdateUi()
     {
         if(UiAmmoController.instance != null)
         {
-            UiAmmoController.instance.InitUi(weaponName, currentAmmo, maxAmmo, activeAmmoSprite, inactiveAmmoSprite);
+            UiAmmoController.instance.InitUi(weaponName, currentAmmo, clipSize, currentReserveAmmo, activeAmmoSprite, inactiveAmmoSprite);
         }
         if(UiController.instance != null)
         {
@@ -189,7 +169,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
         if(UiAmmoController.instance != null) //update ammo in Ui
         {
-            UiAmmoController.instance.UpdateAmmo(currentAmmo);
+            UiAmmoController.instance.UpdateAmmo(currentAmmo, currentReserveAmmo);
         }
 
         ShootRaycast();
@@ -245,7 +225,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
     void BeginReload() //Determines if it can begin reloading, and if so plays sound effect and plays animation.
     {
-        if(currentAmmo == maxAmmo || !canShoot)
+        if(currentAmmo == clipSize || !canShoot || currentReserveAmmo <= 0)
         {
             return;
         }
@@ -262,12 +242,37 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
     void ReloadAmmo() //Called by reload animation, towards the end of the animation. Refills current ammo, and tells Ui to reflect that.
     {
-        currentAmmo = maxAmmo;
+        int ammoDifferential = clipSize - currentAmmo; //how much ammo is required to fill the current magazine;
+        if(currentReserveAmmo >= ammoDifferential)
+        {
+            currentAmmo += ammoDifferential;
+            currentReserveAmmo -= ammoDifferential;
+        }
+        else
+        {
+            currentAmmo += currentReserveAmmo;
+            currentReserveAmmo = 0;
+        }
+        
 
         if(UiAmmoController.instance != null)
         {
-            UiAmmoController.instance.UpdateAmmo(currentAmmo);
+            UiAmmoController.instance.UpdateAmmo(currentAmmo, currentReserveAmmo);
         }
         // weaponAnimator.SetTrigger("Up");
+    }
+
+    public void RefillReserveAmmo()
+    {
+        currentReserveAmmo = clipSize * startingReserveMagazines;
+        if(UiAmmoController.instance != null)
+        {
+            UiAmmoController.instance.UpdateAmmo(currentAmmo, currentReserveAmmo);
+        }
+    }
+
+    public string GetWeaponName()
+    {
+        return weaponName;
     }
 }

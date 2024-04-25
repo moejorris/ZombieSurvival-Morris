@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 4182636366043007599}
   - component: {fileID: 1847526936214102534}
   - component: {fileID: 307717670280713666}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -212,9 +212,9 @@ MonoBehaviour:
   jumpButton: 32
   sprintButton: 304
   walkSpeed: 4.5
-  runSpeed: 9
-  gravityMult: 1
-  jumpForce: 5
+  runSpeed: 7
+  gravityMult: 0.75
+  jumpForce: 2.625
   floorStickForce: 5
   speedChangeFactor: 5
 --- !u!114 &189553595615550500

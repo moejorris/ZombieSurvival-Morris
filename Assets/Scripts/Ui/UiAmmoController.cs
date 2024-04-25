@@ -30,10 +30,10 @@ public class UiAmmoController : MonoBehaviour
         instance = this;
     }
 
-    public void InitUi(string weaponName, int currentAmmo, int maxAmmo, Sprite activeSprite, Sprite inactiveSprite)
+    public void InitUi(string weaponName, int currentAmmo, int clipSize, int currentReserveAmmo, Sprite activeSprite, Sprite inactiveSprite)
     {
         weaponText.text = weaponName;
-        _maxAmmo = maxAmmo;
+        _maxAmmo = clipSize;
 
         activeAmmoSprite = activeSprite;
         inactiveAmmoSprite = inactiveSprite;
@@ -43,22 +43,22 @@ public class UiAmmoController : MonoBehaviour
             Destroy(layoutGroupTransform.GetChild(i).gameObject);
         }
 
-        int dischargedShells = maxAmmo - currentAmmo;
+        int dischargedShells = clipSize - currentAmmo;
 
-        for(int i = 0; i < maxAmmo; i++)
+        for(int i = 0; i < clipSize; i++)
         {
             Image ammoImage = Instantiate(ammoImagePrefab, layoutGroupTransform).GetComponent<Image>();
             ammoImage.sprite = i <= dischargedShells -1 ? inactiveAmmoSprite : activeAmmoSprite;
         }
 
-        ammoCountText.text = "Ammo: " + currentAmmo + "/" + maxAmmo;
+        ammoCountText.text = "Ammo: " + currentAmmo + "/" + currentReserveAmmo;
     }
 
-    public void UpdateAmmo(int currentAmmo) //Updates the Ammo display.
+    public void UpdateAmmo(int currentAmmo, int currentReserveAmmo) //Updates the Ammo display.
     {
         int dischargedShells = _maxAmmo - currentAmmo;
 
-        ammoCountText.text = "Ammo: " + currentAmmo + "/" + _maxAmmo; //Updates ammo text display correct amount of shells left.
+        ammoCountText.text = "Ammo: " + currentAmmo + "/" + currentReserveAmmo; //Updates ammo text display correct amount of shells left.
 
         for(int i = 0; i < layoutGroupTransform.childCount; i++) //Loops through shells that have been used and not used and applies the corresponding sprite.
         {

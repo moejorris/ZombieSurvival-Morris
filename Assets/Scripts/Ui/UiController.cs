@@ -129,7 +129,7 @@ public class UiController : MonoBehaviour
     }
     public void UpdateHealth() //Gets the health from the PlayerHealth script, and displays it in the respective Text and Slider elements.
     {
-        int playerHealth = PlayerHealth.instance.Health;
+        float playerHealth = PlayerHealth.instance.Health;
         healthText.text = "Health: " + playerHealth + "%";
         healthBar.value = playerHealth;
         healthBarFill.color = healthColor.Evaluate(healthBar.normalizedValue);

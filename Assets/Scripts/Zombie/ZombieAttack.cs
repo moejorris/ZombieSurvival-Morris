@@ -33,7 +33,7 @@ public class ZombieAttack : MonoBehaviour
 
     void DamagePlayer()
     {
-        //player.TakeDamage(damageToPlayer);
+        PlayerHealth.instance.TakeDamage(damageToPlayer);
         GetComponent<Animator>().SetTrigger("Attack");
     }
 }
