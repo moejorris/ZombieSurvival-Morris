@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerInteractionHandler : MonoBehaviour
 {
+    [SerializeField] LayerMask interactableLayers;
     [SerializeField] InteractableObject currentInteractable;
     bool canInteract = false;
 
@@ -14,19 +15,10 @@ public class PlayerInteractionHandler : MonoBehaviour
         {
             if(newInteractable != currentInteractable)
             {
-                if(newInteractable.mustLookAt && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit))
-                {
-                    if(hit.transform.GetComponent<InteractableObject>() == newInteractable)
-                    {
-                        currentInteractable = newInteractable;
-                        UpdateInteractText();
-                    }
-                }
-                else
-                {
-                    currentInteractable = newInteractable;
-                    UpdateInteractText();
-                }
+
+                currentInteractable = newInteractable;
+                canInteract = true;
+                UpdateInteractText();
             }
         }
     }
@@ -37,26 +29,28 @@ public class PlayerInteractionHandler : MonoBehaviour
         if(detectedInteractable && detectedInteractable == currentInteractable)
         {
             currentInteractable = null;
+            canInteract = false;
             UpdateInteractText();
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (currentInteractable == null) return;
-        if(currentInteractable.mustLookAt && Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit))
+        if(currentInteractable.mustLookAt)
         {
-            if(hit.transform.GetComponent<InteractableObject>() != currentInteractable)
-            {
-                currentInteractable = null;
-                UpdateInteractText();
-            }
+            Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 100, interactableLayers);
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 100);
+
+            canInteract = hit.transform != null && hit.transform.GetComponent<InteractableObject>() == currentInteractable;
+
+            UpdateInteractText();
         }
     }
 
     void UpdateInteractText()
     {
-        if(currentInteractable && canInteract)
+        if(canInteract)
         {
             UiController.instance.UpdateInteractText(currentInteractable.interactMessage);
         }

@@ -7,7 +7,7 @@ public class InteractableObject : MonoBehaviour
     public bool holdInteractKey;
     public string interactMessage = "Press F to...";
     public int price = 500;
-    public void Interact()
+    public virtual void Interact()
     {
     
     }
