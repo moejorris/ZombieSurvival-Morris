@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3888955322620564209}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Pistol_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 1758608629113403071}
   - component: {fileID: 5523096934600984955}
   - component: {fileID: 6156103732871595973}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 5502715568030375229}
   - component: {fileID: 345901460931396944}
   - component: {fileID: 2811491051584870012}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: TrigerBow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 5595882193226488264}
   - component: {fileID: 5095967386454969364}
   - component: {fileID: 7224084049763362769}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Box001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 1963981799974636480}
   - component: {fileID: 4218595185476766757}
   - component: {fileID: 331871168327387242}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Hummer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 645070736442078461}
   - component: {fileID: 5758032749916534090}
   - component: {fileID: 9048440353758888965}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Weapon_Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +452,7 @@ MonoBehaviour:
   maxDistance: 100
   shootableObjects:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 119
   muzzleFlashTransform: {fileID: 8617463445749611634}
   muzzleFlashPrefab: {fileID: 2888246986386797545, guid: a76ae19c69ef6214f8c6d716da5adcd9, type: 3}
   impactEffectPrefab: {fileID: 2888246986386797545, guid: 2c9dad5f48d6bcb4681a9ade2759a619, type: 3}
@@ -569,7 +569,7 @@ GameObject:
   - component: {fileID: 2200762185266876096}
   - component: {fileID: 2094942125857416756}
   - component: {fileID: 1324143825529373354}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,7 +653,7 @@ GameObject:
   - component: {fileID: 5974005468649001813}
   - component: {fileID: 4389837741863661142}
   - component: {fileID: 6479774412132709903}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: SlideStop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -734,7 +734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8617463445749611634}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: MuzzleFlashPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}

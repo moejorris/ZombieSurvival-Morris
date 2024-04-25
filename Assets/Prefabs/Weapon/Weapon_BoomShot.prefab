@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6729716269428295148}
   - component: {fileID: 1757266135462560905}
   - component: {fileID: 1002236586211156655}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Main_Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1526480958657693464}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: MuzzleFlashPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 2403899277442258246}
   - component: {fileID: 2131336305846164448}
   - component: {fileID: 1898376955858850695}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 143885727581298601}
   - component: {fileID: 8232869035891757163}
   - component: {fileID: 3350431720368922448}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Back_Canister
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 122800708136459558}
   - component: {fileID: 4628247520246517509}
   - component: {fileID: 271119159729685187}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Weapon_BoomShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +365,7 @@ MonoBehaviour:
   maxDistance: 10
   shootableObjects:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 119
   muzzleFlashTransform: {fileID: 1526480958657693464}
   muzzleFlashPrefab: {fileID: 2888246986386797545, guid: 9b73d29013d0424478e3781fd8295a25, type: 3}
   impactEffectPrefab: {fileID: 6259964822848909217, guid: fbc77231f29a9944cab1b3633dab81e7, type: 3}
@@ -480,7 +480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5695905644406400734}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -30,6 +30,7 @@ public class UiController : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthText; //text that displays what the slider is used for and the value of the player's health
     [SerializeField] GameObject hitmarkerPrefab; //object that spawns when the player hits an enemy/object with a healthbar. Feedback that the player hit something.
     [SerializeField] RectTransform[] crosshairLines; //stores each crosshair line's transform
+    [SerializeField] TextMeshProUGUI interactText;
     void Awake()
     {
         instance = this;
@@ -140,5 +141,9 @@ public class UiController : MonoBehaviour
         Instantiate(hitmarkerPrefab, transform);
     }
 
+    public void UpdateInteractText(string text)
+    {
+        interactText.text = text;
+    }
     #endregion
 }

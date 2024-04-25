@@ -13,5 +13,9 @@ public class WallBuyWeapon : InteractableObject
         interactMessage = "Press F to buy " + weapon.GetComponent<PlayerGun>().GetWeaponName() + " for " + price + "points";
         GameObject displayWeapon = Instantiate(weapon.GetComponent<PlayerGun>().displayModel, transform.position, transform.rotation, transform);
         displayWeapon.layer = 0;
+        for(int i = 0; i < displayWeapon.transform.childCount; i++)
+        {
+            displayWeapon.transform.GetChild(i).gameObject.layer = 0;
+        }
     }
 }
