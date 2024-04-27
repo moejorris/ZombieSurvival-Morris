@@ -41,7 +41,7 @@ public class PlayerInteractionHandler : MonoBehaviour
         {
             Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 100, interactableLayers);
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 100);
-
+            Debug.Log(hit.transform.name);
             canInteract = hit.transform != null && hit.transform.GetComponent<InteractableObject>() == currentInteractable;
 
             UpdateInteractText();
