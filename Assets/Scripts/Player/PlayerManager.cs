@@ -6,14 +6,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] KeyCode pauseButton = KeyCode.Escape;
     public float sensX, sensY, FOV; //the sensitivity and FOV options stored here when they are changed in the pause menu.
 
-    int _score = 0;
-
-    public int Score
-    {
-        get { return _score; }
-    }
-    
-
     // public bool dynamicFOV; //Dynamic FOV control has been removed; It is a scrapped feature and was unfinished.
 
     FOVController fOVController; //Refers to the FOV controller.
@@ -32,20 +24,6 @@ public class PlayerManager : MonoBehaviour
 
         InitOptions();
     }
-
-    #region score/points
-
-    public void PlayerScore(int points)
-    {
-        _score += points;
-    }
-
-    public void SpendPoints(int points)
-    {
-        _score -= points;
-    }
-
-    #endregion
 
     #region pause menu
 

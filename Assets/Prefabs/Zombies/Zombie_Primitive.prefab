@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1236590893678477640}
   - component: {fileID: 8864558233779144578}
   - component: {fileID: 2044361629928337616}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Zombie_Primitive
   m_TagString: Zombie
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 187bcab938d5c8e4f93e77c2afb99833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 150
 --- !u!195 &6015304686205954933
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247286445017904252}
   m_Enabled: 1
-  m_AgentTypeID: -334000983
+  m_AgentTypeID: 0
   m_Radius: 0.41
   m_Speed: 3.5
   m_Acceleration: 8
@@ -90,7 +90,7 @@ MonoBehaviour:
   running: 1
   attackTriggerDistance: 2
   walkSpeed: 1.8
-  runSpeed: 4
+  runSpeed: 4.5
   animator: {fileID: 5213428554396617752}
 --- !u!95 &5213428554396617752
 Animator:
@@ -176,8 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canRemoveBarrier: 1
-  isRemovingBarrier: 0
-  initialBarrierRemovalTime: 1
   barrierRemovalRate: 2
   damageToPlayer: 30
   attackPlayerRate: 1
@@ -195,7 +193,7 @@ GameObject:
   - component: {fileID: 5811853215059607952}
   - component: {fileID: 6699874459666796739}
   - component: {fileID: 3936946563559130319}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,8 +325,9 @@ MonoBehaviour:
   canBeDestroyed: 0
   deathOnDestroyed: 0
   timeUntilDeathAfterLimbDestruction: 1
-  limbHealth: 50
+  limbHealth: 0
   damageMultiplier: 1
+  scoreOnShoot: 10
 --- !u!1 &921214323168348009
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +339,7 @@ GameObject:
   - component: {fileID: 3516825236184407407}
   - component: {fileID: 1231933575239184522}
   - component: {fileID: 117590691684756642}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Eye (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +424,7 @@ GameObject:
   - component: {fileID: 4882833154392846343}
   - component: {fileID: 9022606102162785322}
   - component: {fileID: 7656868013492795492}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Foot_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,6 +537,7 @@ MonoBehaviour:
   timeUntilDeathAfterLimbDestruction: 1
   limbHealth: 50
   damageMultiplier: 0.25
+  scoreOnShoot: 10
 --- !u!1 &2199976689382741592
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,7 +549,7 @@ GameObject:
   - component: {fileID: 3003051698009987413}
   - component: {fileID: 7474740020414998603}
   - component: {fileID: 6306509337320463616}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -634,7 +634,7 @@ GameObject:
   - component: {fileID: 633937543851805373}
   - component: {fileID: 7156149562278150925}
   - component: {fileID: 4799656587353613104}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Leg_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -746,8 +746,9 @@ MonoBehaviour:
   canBeDestroyed: 0
   deathOnDestroyed: 0
   timeUntilDeathAfterLimbDestruction: 1
-  limbHealth: 50
+  limbHealth: 0
   damageMultiplier: 0.75
+  scoreOnShoot: 5
 --- !u!1 &3125669084360451989
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,7 +762,7 @@ GameObject:
   - component: {fileID: 6164408628698771041}
   - component: {fileID: 6748768928935329136}
   - component: {fileID: 3377458931341579484}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -872,8 +873,9 @@ MonoBehaviour:
   canBeDestroyed: 1
   deathOnDestroyed: 0
   timeUntilDeathAfterLimbDestruction: 1
-  limbHealth: 25
+  limbHealth: 50
   damageMultiplier: 0.25
+  scoreOnShoot: 10
 --- !u!1 &3246028364794902764
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,7 +888,7 @@ GameObject:
   - component: {fileID: 3493426421512723561}
   - component: {fileID: 5987341226674140447}
   - component: {fileID: 9061892156088261794}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,7 +996,7 @@ GameObject:
   - component: {fileID: 6383549242427904665}
   - component: {fileID: 5527574807675906710}
   - component: {fileID: 4572011111433855820}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Leg_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1106,8 +1108,9 @@ MonoBehaviour:
   canBeDestroyed: 0
   deathOnDestroyed: 0
   timeUntilDeathAfterLimbDestruction: 1
-  limbHealth: 50
+  limbHealth: 0
   damageMultiplier: 0.75
+  scoreOnShoot: 5
 --- !u!1 &4226448724554132742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,7 +1123,7 @@ GameObject:
   - component: {fileID: 1220017485407902710}
   - component: {fileID: 7699773154794256114}
   - component: {fileID: 9002255363517596814}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1224,7 +1227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 786223272941873671}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Hip_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1260,7 +1263,7 @@ GameObject:
   - component: {fileID: 4117921531971113724}
   - component: {fileID: 8623959530182252883}
   - component: {fileID: 6248641073190329387}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Foot_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1373,6 +1376,7 @@ MonoBehaviour:
   timeUntilDeathAfterLimbDestruction: 1
   limbHealth: 50
   damageMultiplier: 0.25
+  scoreOnShoot: 10
 --- !u!1 &5702417490430172953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1382,7 +1386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6356356093128716109}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Hip_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1414,7 +1418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6509951054538582560}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1454,7 +1458,7 @@ GameObject:
   - component: {fileID: 5155940031681605751}
   - component: {fileID: 4119753945201771209}
   - component: {fileID: 7657107147077393878}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Waist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1558,7 +1562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3116106548469784241}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Arms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1595,7 +1599,7 @@ GameObject:
   - component: {fileID: 182729675311269469}
   - component: {fileID: 8117629967350097875}
   - component: {fileID: 8523171908043646987}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1708,8 +1712,9 @@ MonoBehaviour:
   canBeDestroyed: 1
   deathOnDestroyed: 1
   timeUntilDeathAfterLimbDestruction: 3
-  limbHealth: 50
-  damageMultiplier: 1.5
+  limbHealth: 20
+  damageMultiplier: 1.75
+  scoreOnShoot: 25
 --- !u!1 &8696228035834089098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,7 +1728,7 @@ GameObject:
   - component: {fileID: 4494999165584332378}
   - component: {fileID: 1920891579897905319}
   - component: {fileID: 6521602179276704173}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1834,5 +1839,6 @@ MonoBehaviour:
   canBeDestroyed: 1
   deathOnDestroyed: 0
   timeUntilDeathAfterLimbDestruction: 1
-  limbHealth: 25
+  limbHealth: 50
   damageMultiplier: 0.25
+  scoreOnShoot: 10

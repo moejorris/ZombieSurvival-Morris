@@ -10,11 +10,20 @@ public class ZombieLimb : MonoBehaviour
     [SerializeField] float timeUntilDeathAfterLimbDestruction = 1;
     [SerializeField] float limbHealth = 50;
     [SerializeField] float damageMultiplier = 1;
+    [SerializeField] int scoreOnShoot = 10;
 
-    public void Hit(float damage)
+    void Start()
+    {
+        if(canBeDestroyed)
+        {
+            limbHealth = GetComponentInParent<ZombieHealth>().health * (limbHealth/100);
+        }
+    }
+
+    public void TakeDamage(float damage)
     {
         GetComponentInParent<ZombieHealth>().TakeDamage(damage * damageMultiplier);
-        
+        GameManager.instance.PlayerScore(scoreOnShoot);
         if(canBeDestroyed)
         {
             limbHealth -= damage;
@@ -25,7 +34,10 @@ public class ZombieLimb : MonoBehaviour
 
                 if(deathOnDestroyed)
                 {
-                    GetComponentInParent<ZombieHealth>().Invoke("Die", timeUntilDeathAfterLimbDestruction);
+                    if(GetComponentInParent<ZombieHealth>())
+                    {
+                        GetComponentInParent<ZombieHealth>().Invoke("Die", timeUntilDeathAfterLimbDestruction);
+                    }
                 }
                 this.enabled = false;
             }

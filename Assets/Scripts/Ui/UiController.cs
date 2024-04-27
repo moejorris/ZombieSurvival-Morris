@@ -31,6 +31,11 @@ public class UiController : MonoBehaviour
     [SerializeField] GameObject hitmarkerPrefab; //object that spawns when the player hits an enemy/object with a healthbar. Feedback that the player hit something.
     [SerializeField] RectTransform[] crosshairLines; //stores each crosshair line's transform
     [SerializeField] TextMeshProUGUI interactText;
+    [SerializeField] TextMeshProUGUI reloadText;
+    [SerializeField] TextMeshProUGUI roundText;
+    [SerializeField] TextMeshProUGUI zombiesLeftText;
+    [SerializeField] TextMeshProUGUI scoreText;
+
     void Awake()
     {
         instance = this;
@@ -144,6 +149,26 @@ public class UiController : MonoBehaviour
     public void UpdateInteractText(string text)
     {
         interactText.text = text;
+    }
+
+    public void DisplayReloadText(bool visible)
+    {
+        reloadText.text = visible ? "Press R to Reload" : "";
+    }
+
+    public void UpdateRoundText(int round)
+    {
+        roundText.text = "Round " + round;
+    }
+
+    public void UpdateZombiesLeftText(int zombiesLeft)
+    {
+        zombiesLeftText.text = "Zombies Left: " + zombiesLeft;
+    }
+
+    public void UpdateScoreText(int score)
+    {
+        scoreText.text = "Score: " + score;
     }
     #endregion
 }

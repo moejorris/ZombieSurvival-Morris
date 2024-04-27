@@ -19,5 +19,7 @@ public class ZombieHealth : MonoBehaviour
     {
         Debug.Log("Death!");
         gameObject.SetActive(false);
+
+        //Let roundManager know
     }
 }

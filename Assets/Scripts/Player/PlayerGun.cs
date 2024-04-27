@@ -198,10 +198,11 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
         if(Physics.Raycast(ray, out hit, maxDistance, shootableObjects, QueryTriggerInteraction.Ignore))
         {
-            if(hit.transform.GetComponent<Health>() != null) //If object hit has a health component inflict damage
+            if(hit.point != null) Debug.Log(hit.collider.name);
+            if(hit.collider.GetComponent<ZombieLimb>() != null) //If object hit has a health component inflict damage
             {
-                hit.transform.GetComponent<Health>().TakeDamage(damageToInflict);
-                
+                hit.collider.GetComponent<ZombieLimb>().TakeDamage(damageToInflict);
+                Debug.Log("Hit limb");
 
                 if(UiController.instance != null)
                 {

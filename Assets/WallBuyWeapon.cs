@@ -55,24 +55,25 @@ public class WallBuyWeapon : InteractableObject
 
     public override void Interact()
     {
-        if(PlayerManager.instance.Score >= price)
-        {
-            PlayerManager.instance.SpendPoints(price);
-            /*
-                PlayerWeaponManager weaponManager = PlayerWeaponManager.instance;
-                string currentWeapon = weapon.GetComponent<PlayerGun>().GetWeaponName();
-                bool playerHasWeapon;
+        Debug.Log("Interacted");
+        // if()
+        // {
+        //     ;
+        //     /*
+        //         PlayerWeaponManager weaponManager = PlayerWeaponManager.instance;
+        //         string currentWeapon = weapon.GetComponent<PlayerGun>().GetWeaponName();
+        //         bool playerHasWeapon;
 
-                for(int i = 0; i < PlayerWeaponManager.instance.weaponInventory.Length)
-                {
-                    PlayerGun weapon = PlayerWeaponManager.instance.weaponInventory[i].GetComponent<PlayerGun>();
-                    if(weapon != null && weapon.GetWeaponName() == currentWeapon)
-                    {
+        //         for(int i = 0; i < PlayerWeaponManager.instance.weaponInventory.Length)
+        //         {
+        //             PlayerGun weapon = PlayerWeaponManager.instance.weaponInventory[i].GetComponent<PlayerGun>();
+        //             if(weapon != null && weapon.GetWeaponName() == currentWeapon)
+        //             {
 
-                    }
-                }
-            */
-        }
+        //             }
+        //         }
+        //     */
+        // }
     }
 
     void OnTriggerEnter(Collider other)

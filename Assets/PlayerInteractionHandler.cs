@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerInteractionHandler : MonoBehaviour
 {
+    [SerializeField] KeyCode interactKey = KeyCode.F;
+    [SerializeField] float keyHoldTime = 0.1f;
     [SerializeField] LayerMask interactableLayers;
     [SerializeField] InteractableObject currentInteractable;
     bool canInteract = false;
@@ -36,15 +38,41 @@ public class PlayerInteractionHandler : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (currentInteractable == null) return;
-        if(currentInteractable.mustLookAt)
+        if (currentInteractable == null || !currentInteractable.mustLookAt)
         {
-            Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, 100, interactableLayers);
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 100);
-            Debug.Log(hit.transform.name);
-            canInteract = hit.transform != null && hit.transform.GetComponent<InteractableObject>() == currentInteractable;
+            return;
+        }
 
-            UpdateInteractText();
+        Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 0.1f, Camera.main.transform.forward, out RaycastHit hit, 100, interactableLayers);
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 100);
+        canInteract = hit.transform != null && hit.transform.GetComponent<InteractableObject>() == currentInteractable;
+
+        UpdateInteractText();
+    }
+
+    void Update()
+    {
+        if(currentInteractable != null && canInteract)
+        {
+            if(Input.GetKeyDown(interactKey))
+            {
+                if(currentInteractable.holdInteractKey)
+                {
+                    Invoke("InteractIfKeyIsHeld", keyHoldTime);
+                }
+                else
+                {
+                    currentInteractable.Interact();
+                }
+            }
+        }
+    }
+
+    void InteractIfKeyIsHeld() //checks to see if the interact key is still held when it is invoked
+    {
+        if(Input.GetKey(interactKey))
+        {
+            currentInteractable.Interact();
         }
     }
 
