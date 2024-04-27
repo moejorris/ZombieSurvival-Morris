@@ -196,7 +196,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         RaycastHit hit;
         Ray ray = new Ray(Camera.main.transform.position, bulletTrajectory);
 
-        if(Physics.Raycast(ray, out hit, maxDistance, shootableObjects))
+        if(Physics.Raycast(ray, out hit, maxDistance, shootableObjects, QueryTriggerInteraction.Ignore))
         {
             if(hit.transform.GetComponent<Health>() != null) //If object hit has a health component inflict damage
             {
