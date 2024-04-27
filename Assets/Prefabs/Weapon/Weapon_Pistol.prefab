@@ -448,7 +448,7 @@ MonoBehaviour:
   fullAuto: 0
   maxSpread: 2
   aimSpreadMultiplier: 0.1
-  damageToInflict: 10
+  damageToInflict: 25
   maxDistance: 100
   shootableObjects:
     serializedVersion: 2

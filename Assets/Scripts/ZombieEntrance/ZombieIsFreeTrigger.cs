@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ZombieIsFreeTrigger : MonoBehaviour
 {
-    void OnTriggerEnter(Collider other)
+    void OnTriggerExit(Collider other)
     {
         ZombieAttack zombie = other.gameObject.GetComponent<ZombieAttack>();
         if(zombie && zombie.canRemoveBarrier)

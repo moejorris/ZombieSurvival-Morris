@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ZombieEntrance : MonoBehaviour
+public class ZombieEntrance : InteractableObject
 {
     [SerializeField] GameObject[] planks;
     [SerializeField] NavMeshObstacle navMeshObstacle;
@@ -46,6 +46,7 @@ public class ZombieEntrance : MonoBehaviour
     {
         if(GetActivePlanks() >= planks.Length)
         {
+            CancelInvoke("AddPlank");
             return;
         }
 
@@ -57,6 +58,7 @@ public class ZombieEntrance : MonoBehaviour
                 planks[i].SetActive(true);
                 NavMeshObstacleCheck();
                 Debug.Log("Added Plank");
+                GameManager.instance.PlayerScore(10);
                 return;
             }
         }
@@ -86,18 +88,34 @@ public class ZombieEntrance : MonoBehaviour
             }
         }
 
+        if(enabledPlanks >= planks.Length)
+        {
+            currentlyInteractable = false;
+        }
+        else
+        {
+            currentlyInteractable = true;
+        }
+
         return enabledPlanks;
+    }
+
+    public override void Interact()
+    {
+        InvokeRepeating("AddPlank", 1, 1);
+        Debug.Log("Player Bulding");
+
+    }
+
+    public override void CancelInteract()
+    {
+        CancelInvoke("AddPlank");
+        Debug.Log("Player stopped building");
     }
 
     void OnTriggerEnter(Collider other)
     {
         BeginRemovingBarrier(other.GetComponent<ZombieAttack>());
-
-        if(other.CompareTag("Player"))
-        {
-            Debug.Log("Player Bulding");
-            InvokeRepeating("AddPlank", 1, 1);
-        }
     }
 
     void OnTriggerExit(Collider other)

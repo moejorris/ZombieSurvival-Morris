@@ -15,7 +15,7 @@ public class PlayerInteractionHandler : MonoBehaviour
         InteractableObject newInteractable = other.GetComponent<InteractableObject>();
         if(newInteractable)
         {
-            if(newInteractable != currentInteractable)
+            if(newInteractable != currentInteractable && newInteractable.currentlyInteractable)
             {
 
                 currentInteractable = newInteractable;
@@ -38,16 +38,26 @@ public class PlayerInteractionHandler : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (currentInteractable == null || !currentInteractable.mustLookAt)
+        if (currentInteractable == null)
         {
             return;
         }
 
-        Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 0.1f, Camera.main.transform.forward, out RaycastHit hit, 100, interactableLayers);
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 100);
-        canInteract = hit.transform != null && hit.transform.GetComponent<InteractableObject>() == currentInteractable;
+        if(!currentInteractable.currentlyInteractable)
+        {
+            UpdateInteractText();
+            return;
+        }
 
-        UpdateInteractText();
+
+        if(currentInteractable.mustLookAt)
+        {
+            Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward * 0.1f, Camera.main.transform.forward, out RaycastHit hit, 100, interactableLayers);
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 100);
+            canInteract = hit.transform != null && hit.transform.GetComponent<InteractableObject>() == currentInteractable;
+
+            UpdateInteractText();
+        }
     }
 
     void Update()
@@ -62,9 +72,29 @@ public class PlayerInteractionHandler : MonoBehaviour
                 }
                 else
                 {
-                    currentInteractable.Interact();
+                    ActivateInteractable();
                 }
             }
+
+            if(Input.GetKeyUp(interactKey))
+            {
+                CancelInvoke("InteractIfKeyIsHeld");
+                currentInteractable.CancelInteract();
+            }
+        }
+    }
+
+    void ActivateInteractable()
+    {
+        if(GameManager.instance.SpendPoints(currentInteractable.price))
+        {
+            currentInteractable.Interact();
+            if(!currentInteractable.stayActiveAfterInteract)
+            {
+                currentInteractable = null;
+                canInteract = false;
+            }
+            UpdateInteractText();
         }
     }
 
@@ -72,13 +102,13 @@ public class PlayerInteractionHandler : MonoBehaviour
     {
         if(Input.GetKey(interactKey))
         {
-            currentInteractable.Interact();
+            ActivateInteractable();
         }
     }
 
     void UpdateInteractText()
     {
-        if(canInteract)
+        if(canInteract && currentInteractable.currentlyInteractable)
         {
             UiController.instance.UpdateInteractText(currentInteractable.interactMessage);
         }

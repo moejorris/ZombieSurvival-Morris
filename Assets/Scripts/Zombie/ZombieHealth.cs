@@ -18,6 +18,7 @@ public class ZombieHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Death!");
+        GetComponent<ZombieAttack>().CancelInvoke();
         gameObject.SetActive(false);
 
         //Let roundManager know
