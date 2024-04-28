@@ -62,7 +62,7 @@ MonoBehaviour:
   maxDistance: 100
   shootableObjects:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 129
   muzzleFlashTransform: {fileID: 6185708126861144507}
   muzzleFlashPrefab: {fileID: 2888246986386797545, guid: a76ae19c69ef6214f8c6d716da5adcd9, type: 3}
   impactEffectPrefab: {fileID: 2888246986386797545, guid: 2c9dad5f48d6bcb4681a9ade2759a619, type: 3}

@@ -56,8 +56,9 @@ public class ZombieEntrance : InteractableObject
             if(!planks[i].activeInHierarchy)
             {
                 planks[i].SetActive(true);
+                PlayerManager.instance.GetComponent<PlayerInteractionHandler>().PlayBuySoundEffect(); //messy way to call this function, but this is likely going to be the only time an external script calls a method of this class.
                 NavMeshObstacleCheck();
-                Debug.Log("Added Plank");
+                // Debug.Log("Added Plank");
                 GameManager.instance.PlayerScore(10);
                 return;
             }
@@ -103,7 +104,7 @@ public class ZombieEntrance : InteractableObject
     public override void Interact()
     {
         InvokeRepeating("AddPlank", 1, 1);
-        Debug.Log("Player Bulding");
+        // Debug.Log("Player Bulding");
 
     }
 
@@ -113,19 +114,13 @@ public class ZombieEntrance : InteractableObject
         Debug.Log("Player stopped building");
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        BeginRemovingBarrier(other.GetComponent<ZombieAttack>());
-    }
-
     void OnTriggerExit(Collider other)
     {
         ZombieAttack zombie = other.gameObject.GetComponent<ZombieAttack>();
 
         if(zombie)
         {
-            CancelInvoke("RemovePlank");
-            alreadyRunning = false;
+            StopRemovingBarrier();
         }
 
         if(other.CompareTag("Player")) //Rework to include player must interact
@@ -141,17 +136,24 @@ public class ZombieEntrance : InteractableObject
         BeginRemovingBarrier(other.GetComponent<ZombieAttack>());
     }
 
-    void BeginRemovingBarrier(ZombieAttack zombieAttack)
+    public bool BeginRemovingBarrier(ZombieAttack zombieAttack)
     {
-        if(zombieAttack == null) return;
-
         ZombieAttack zombie = zombieAttack;
 
         if(!alreadyRunning && zombie.canRemoveBarrier)
         {
             InvokeRepeating("RemovePlank", zombie.barrierRemovalRate, zombie.barrierRemovalRate);
             alreadyRunning = true;
+            return true;
         }
+
+        return false;
+    }
+
+    public void StopRemovingBarrier() //also called by ZombieAttack on death
+    {
+        CancelInvoke("RemovePlank");
+        alreadyRunning = false;
     }
 
 

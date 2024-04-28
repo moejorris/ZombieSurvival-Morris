@@ -27,6 +27,7 @@ public class PlayerHealth : Health //Player derivative of Health
     void Heal()
     {
         currentHealth = maxHealth;
+        UiController.instance.UpdateHealth();
     }
 
     public override void TakeDamage(float damageInflicted) //Adds playing the sound and updating the Ui to the base function. Also ensures the script is enabled to stop it from being called after the player is dead.
@@ -34,7 +35,7 @@ public class PlayerHealth : Health //Player derivative of Health
         if(enabled) //this script is disabled when the player is paused, either when the game is over or the game is paused. This ensures nothing happens in either case.
         {
             CancelInvoke("Heal");
-            
+
             audioSource.PlayOneShot(damageSound);
             base.TakeDamage(damageInflicted);
             UiController.instance.UpdateHealth();

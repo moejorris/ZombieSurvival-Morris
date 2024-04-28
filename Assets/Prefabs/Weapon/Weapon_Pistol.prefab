@@ -441,9 +441,9 @@ MonoBehaviour:
   reloadButton: 114
   weaponAnimator: {fileID: 645070736442078461}
   audioSource: {fileID: 9048440353758888965}
-  clipSize: 0
-  startingReserveMagazines: 3
-  currentAmmo: 8
+  clipSize: 8
+  startingReserveMagazines: 4
+  currentAmmo: 0
   currentReserveAmmo: 0
   fullAuto: 0
   maxSpread: 2
@@ -452,7 +452,7 @@ MonoBehaviour:
   maxDistance: 100
   shootableObjects:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 129
   muzzleFlashTransform: {fileID: 8617463445749611634}
   muzzleFlashPrefab: {fileID: 2888246986386797545, guid: a76ae19c69ef6214f8c6d716da5adcd9, type: 3}
   impactEffectPrefab: {fileID: 2888246986386797545, guid: 2c9dad5f48d6bcb4681a9ade2759a619, type: 3}

@@ -65,7 +65,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
         currentAmmo = clipSize;
         currentReserveAmmo = clipSize * startingReserveMagazines;
-        canShoot = true;
+        canShoot = false;
         UpdateUi();
     }
     void OnEnable()

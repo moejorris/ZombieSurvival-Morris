@@ -365,8 +365,8 @@ MonoBehaviour:
   currentlyInteractable: 0
   stayActiveAfterInteract: 1
   mustLookAt: 0
-  holdInteractKey: 0
-  interactMessage: Press F to rebuild barrier
+  holdInteractKey: 1
+  interactMessage: Press and hold F to rebuild barrier
   price: 0
   planks:
   - {fileID: 1638176241192868634}
@@ -377,6 +377,7 @@ MonoBehaviour:
   - {fileID: 7643267782076932166}
   navMeshObstacle: {fileID: 4784137136536268141}
   alreadyRunning: 0
+  currentZombie: {fileID: 0}
 --- !u!208 &4784137136536268141
 NavMeshObstacle:
   m_ObjectHideFlags: 0

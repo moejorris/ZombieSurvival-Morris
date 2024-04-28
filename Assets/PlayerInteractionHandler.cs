@@ -8,6 +8,8 @@ public class PlayerInteractionHandler : MonoBehaviour
     [SerializeField] float keyHoldTime = 0.1f;
     [SerializeField] LayerMask interactableLayers;
     [SerializeField] InteractableObject currentInteractable;
+    [SerializeField] AudioClip chaChingSound;
+    bool keyHeld;
     bool canInteract = false;
 
     void OnTriggerEnter(Collider other)
@@ -62,10 +64,12 @@ public class PlayerInteractionHandler : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(keyHeld);
         if(currentInteractable != null && canInteract)
         {
-            if(Input.GetKeyDown(interactKey))
+            if(Input.GetKey(interactKey) && keyHeld == false)
             {
+                keyHeld = true;
                 if(currentInteractable.holdInteractKey)
                 {
                     Invoke("InteractIfKeyIsHeld", keyHoldTime);
@@ -78,6 +82,7 @@ public class PlayerInteractionHandler : MonoBehaviour
 
             if(Input.GetKeyUp(interactKey))
             {
+                keyHeld = false;
                 CancelInvoke("InteractIfKeyIsHeld");
                 currentInteractable.CancelInteract();
             }
@@ -88,6 +93,10 @@ public class PlayerInteractionHandler : MonoBehaviour
     {
         if(GameManager.instance.SpendPoints(currentInteractable.price))
         {
+            if(currentInteractable.price > 0)
+            {
+                PlayBuySoundEffect();
+            }
             currentInteractable.Interact();
             if(!currentInteractable.stayActiveAfterInteract)
             {
@@ -116,5 +125,10 @@ public class PlayerInteractionHandler : MonoBehaviour
         {
             UiController.instance.UpdateInteractText("");
         }
+    }
+
+    public void PlayBuySoundEffect()
+    {
+        GetComponent<AudioSource>().PlayOneShot(chaChingSound);
     }
 }

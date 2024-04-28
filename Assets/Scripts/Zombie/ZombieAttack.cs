@@ -8,12 +8,20 @@ public class ZombieAttack : MonoBehaviour
     public float barrierRemovalRate = 2;
     [SerializeField] float damageToPlayer = 10;
     [SerializeField] float attackPlayerRate;
-
+    ZombieEntrance currentEntrance;
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
             InvokeRepeating("Attack", 0, 1);
+        }
+
+        if(other.GetComponent<ZombieEntrance>())
+        {
+            if(other.GetComponent<ZombieEntrance>().BeginRemovingBarrier(this))
+            {
+                currentEntrance = other.GetComponent<ZombieEntrance>();
+            }
         }
     }
 
@@ -35,5 +43,12 @@ public class ZombieAttack : MonoBehaviour
     {
         PlayerHealth.instance.TakeDamage(damageToPlayer);
         GetComponent<Animator>().SetTrigger("Attack");
+    }
+
+    public void OnDeath()
+    {
+        currentEntrance.StopRemovingBarrier();
+        currentEntrance = null;
+        CancelInvoke();
     }
 }

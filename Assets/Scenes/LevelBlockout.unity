@@ -17392,6 +17392,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5839026108207961663, guid: 06f438cfae0e51b4eb48844a8a65e477, type: 3}
+      propertyPath: chaChingSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 02d9233bcdc23d849a48d956a308afe5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -17451,18 +17455,6 @@ PrefabInstance:
     - target: {fileID: 5071056636186329625, guid: ce0810eee8082d84ab3a8c74fffae9bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5758032749916534090, guid: ce0810eee8082d84ab3a8c74fffae9bd, type: 3}
-      propertyPath: clipSize
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5758032749916534090, guid: ce0810eee8082d84ab3a8c74fffae9bd, type: 3}
-      propertyPath: currentAmmo
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5758032749916534090, guid: ce0810eee8082d84ab3a8c74fffae9bd, type: 3}
-      propertyPath: startingReserveMagazines
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
