@@ -354,9 +354,10 @@ MonoBehaviour:
   reloadButton: 114
   weaponAnimator: {fileID: 122800708136459558}
   audioSource: {fileID: 271119159729685187}
-  clipSize: 0
-  startingReserveMagazines: 3
-  currentAmmo: 2
+  unlimitedAmmo: 0
+  clipSize: 2
+  startingReserveMagazines: 10
+  currentAmmo: 0
   currentReserveAmmo: 0
   fullAuto: 0
   maxSpread: 2

@@ -17,6 +17,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [SerializeField] AudioSource audioSource; //Optional
 
     [Header("Ammo Definitions")]
+    [SerializeField] bool unlimitedAmmo; //does not use bullets when shooting/never has to reload
     [SerializeField] int clipSize; //how much ammo can be held in each magazine
     [SerializeField] int startingReserveMagazines = 3; //how many reserve magazines of ammo the player has at the start. Replenished on max ammo.
     [SerializeField] int currentAmmo; //How much ammo is currently available
@@ -70,6 +71,8 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     }
     void OnEnable()
     {
+        canShoot = false;
+        reloading = false;
         UpdateUi();
     }
 
@@ -153,7 +156,11 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         }
 
         canShoot = false; //can't shoot during shoot animation
-        currentAmmo--;
+        
+        if(!unlimitedAmmo) //takes ammo if gun does not have unlimited ammo
+        {
+            currentAmmo--;
+        }
         
         if(audioSource != null && shootSound != null) //play sound effect
         {

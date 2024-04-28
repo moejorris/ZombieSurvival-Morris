@@ -121,6 +121,7 @@ public class ZombieEntrance : InteractableObject
         if(zombie)
         {
             StopRemovingBarrier();
+            zombie.currentEntrance = null;
         }
 
         if(other.CompareTag("Player")) //Rework to include player must interact
@@ -136,12 +137,23 @@ public class ZombieEntrance : InteractableObject
         BeginRemovingBarrier(other.GetComponent<ZombieAttack>());
     }
 
-    public bool BeginRemovingBarrier(ZombieAttack zombieAttack)
+    void OnTriggerEnter(Collider other)
     {
+        BeginRemovingBarrier(other.GetComponent<ZombieAttack>());
+    }
+
+    public bool BeginRemovingBarrier(ZombieAttack zombieAttack) //also called by zombieAttack class when it enters the trigger. If it returns true, it gives that zombie a reference to this entrance/barrier so when it dies it can tell it to stop removing planks.
+    {
+        if(zombieAttack == null)
+        {
+            return false;
+        }
+
         ZombieAttack zombie = zombieAttack;
 
         if(!alreadyRunning && zombie.canRemoveBarrier)
         {
+            zombie.currentEntrance = this;
             InvokeRepeating("RemovePlank", zombie.barrierRemovalRate, zombie.barrierRemovalRate);
             alreadyRunning = true;
             return true;

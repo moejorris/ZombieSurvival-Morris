@@ -108,9 +108,9 @@ GameObject:
   - component: {fileID: 189553595615550500}
   - component: {fileID: 4182636366043007599}
   - component: {fileID: 1847526936214102534}
+  - component: {fileID: 1828182149620655494}
   - component: {fileID: 5839026108207961663}
   - component: {fileID: 307717670280713666}
-  - component: {fileID: 1828182149620655494}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -268,8 +268,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 100
+  healTime: 5
   damageSound: {fileID: 8300000, guid: 934ca06747ae47744b1f6f8c35b95d95, type: 3}
   deathSound: {fileID: 8300000, guid: f32993041fab8d4498f7d23acbc96060, type: 3}
+--- !u!114 &1828182149620655494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040527233124908387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14d61cb5afe250c4fba23714e9c165b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponHolderTransform: {fileID: 7887738692933395456}
+  weaponInventory: []
+  currentWeaponIndex: 0
+  maxWeapons: 2
+  defaultWeapon: {fileID: 4173990491179368116, guid: ce0810eee8082d84ab3a8c74fffae9bd, type: 3}
 --- !u!114 &5839026108207961663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,6 +306,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   currentInteractable: {fileID: 0}
+  chaChingSound: {fileID: 8300000, guid: 02d9233bcdc23d849a48d956a308afe5, type: 3}
 --- !u!82 &307717670280713666
 AudioSource:
   m_ObjectHideFlags: 0
@@ -384,18 +403,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1828182149620655494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040527233124908387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14d61cb5afe250c4fba23714e9c165b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2993463215475497384
 GameObject:
   m_ObjectHideFlags: 0

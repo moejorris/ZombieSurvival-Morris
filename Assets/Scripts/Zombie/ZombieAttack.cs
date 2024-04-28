@@ -8,7 +8,7 @@ public class ZombieAttack : MonoBehaviour
     public float barrierRemovalRate = 2;
     [SerializeField] float damageToPlayer = 10;
     [SerializeField] float attackPlayerRate;
-    ZombieEntrance currentEntrance;
+    public ZombieEntrance currentEntrance;
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
@@ -47,8 +47,12 @@ public class ZombieAttack : MonoBehaviour
 
     public void OnDeath()
     {
-        currentEntrance.StopRemovingBarrier();
-        currentEntrance = null;
+        if(currentEntrance != null) //tells the entrance it is attacking (if any) to stop removing planks because it is dead.
+        {
+            currentEntrance.StopRemovingBarrier();
+            currentEntrance = null;
+        }
+
         CancelInvoke();
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WallBuyWeapon : InteractableObject
@@ -11,19 +12,22 @@ public class WallBuyWeapon : InteractableObject
     int buyPrice;
     [SerializeField] int refillAmmoPrice;
     [SerializeField] GameObject weapon;
+    string weaponName;
+    PlayerWeaponManager player;
+    int slotPlayerHasWeapon;
 
     void Start()
     {
-        Destroy(transform.GetChild(0).gameObject);
+        Destroy(transform.GetChild(0).gameObject); //destroys display model used for reference in editor.
 
         buyPrice = price;
-
-        buyWeaponMessage = "Press F to buy " + weapon.GetComponent<PlayerGun>().GetWeaponName() + " for " + buyPrice + " points";
-        refillWeaponMessage = "Press F to buy " + weapon.GetComponent<PlayerGun>().GetWeaponName() + " ammo for " + refillAmmoPrice + " points";
+        weaponName = weapon.GetComponent<PlayerGun>().GetWeaponName();
+        buyWeaponMessage = "Press F to buy " + weaponName + " for " + buyPrice + " points";
+        refillWeaponMessage = "Press F to buy " + weaponName + " ammo for " + refillAmmoPrice + " points";
 
         GameObject displayWeapon = Instantiate(weapon.GetComponent<PlayerGun>().displayModel, transform.position, transform.rotation, transform);
         
-        displayWeapon.layer = 0;
+        displayWeapon.layer = 0; //take it out of WeaponCam layer so player cannot see it through walls.
         
         for(int i = 0; i < displayWeapon.transform.childCount; i++)
         {
@@ -31,62 +35,40 @@ public class WallBuyWeapon : InteractableObject
         }
     }
 
-    bool PlayerHasThisGun()
-    {
-        //delete the below return when weapon manager is completed. Maybe make this a function of the weapon managers??? depends
-        return true;
-
-        /*
-            PlayerWeaponManager weaponManager = PlayerWeaponManager.Instance;
-            string thisWeaponName = weapon.GetComponenet<PlayerGun>().GetWeaponName();
-            
-            for(int i = 0; i < weaponManager.weaponInventory.Length)
-            {
-                PlayerGun weapon = weaponManager.weaponInventory[i].GetComponent<PlayerGun>();
-                if(weapon.GetWeaponName() == thisWeaponName)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        */
-    }
-
     public override void Interact()
     {
-        Debug.Log("Interacted");
-        // if()
-        // {
-        //     ;
-        //     /*
-        //         PlayerWeaponManager weaponManager = PlayerWeaponManager.instance;
-        //         string currentWeapon = weapon.GetComponent<PlayerGun>().GetWeaponName();
-        //         bool playerHasWeapon;
-
-        //         for(int i = 0; i < PlayerWeaponManager.instance.weaponInventory.Length)
-        //         {
-        //             PlayerGun weapon = PlayerWeaponManager.instance.weaponInventory[i].GetComponent<PlayerGun>();
-        //             if(weapon != null && weapon.GetWeaponName() == currentWeapon)
-        //             {
-
-        //             }
-        //         }
-        //     */
-        // }
+        if(price == buyPrice)
+        {
+            player.GainWeapon(weapon);
+        }
+        else if(price == refillAmmoPrice)
+        {
+            player.RefillWeaponAmmo(slotPlayerHasWeapon);
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if(PlayerHasThisGun())
+        UpdatePrice(other.GetComponent<PlayerWeaponManager>());
+    }
+
+    void UpdatePrice(PlayerWeaponManager playerWeaponManager)
+    {
+        if(playerWeaponManager)
         {
-            price = refillAmmoPrice;
-            interactMessage = refillWeaponMessage;
-        }
-        else
-        {
-            price = buyPrice;
-            interactMessage = buyWeaponMessage;
+            player = playerWeaponManager;
+            slotPlayerHasWeapon = player.CheckIfPlayerHasGun(weaponName);
+
+            if(slotPlayerHasWeapon != -1)
+            {
+                price = refillAmmoPrice;
+                interactMessage = refillWeaponMessage;
+            }
+            else
+            {
+                price = buyPrice;
+                interactMessage = buyWeaponMessage;
+            }
         }
     }
 }
