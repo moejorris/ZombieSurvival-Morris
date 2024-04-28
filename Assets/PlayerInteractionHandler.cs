@@ -86,6 +86,10 @@ public class PlayerInteractionHandler : MonoBehaviour
                 currentInteractable.CancelInteract();
             }
         }
+        else
+        {
+            keyHeld = false;
+        }
     }
 
     void ActivateInteractable()

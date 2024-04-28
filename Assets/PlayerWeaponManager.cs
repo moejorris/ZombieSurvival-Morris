@@ -69,9 +69,14 @@ public class PlayerWeaponManager : MonoBehaviour
         }
     }
 
+    public bool IsWeaponAtMaxAmmo(int slotWeaponIsIn)
+    {
+        return weaponInventory[slotWeaponIsIn].GetComponent<PlayerGun>().CheckIfWeaponAtMaxAmmo();
+    }
+
     public void RefillWeaponAmmo(int slotWeaponIsIn)
     {
-
+        weaponInventory[slotWeaponIsIn].GetComponent<PlayerGun>().RefillReserveAmmo();
     }
 
     public int CheckIfPlayerHasGun(string weaponName) //checks if player has the gun being inputted and returns the slot it is in. returns -1 if player does not have it.

@@ -22,16 +22,25 @@ public class WallBuyWeapon : InteractableObject
 
         buyPrice = price;
         weaponName = weapon.GetComponent<PlayerGun>().GetWeaponName();
-        buyWeaponMessage = "Press F to buy " + weaponName + " for " + buyPrice + " points";
-        refillWeaponMessage = "Press F to buy " + weaponName + " ammo for " + refillAmmoPrice + " points";
+        buyWeaponMessage = "Press and hold F to buy " + weaponName + " for " + buyPrice + " points";
+        refillWeaponMessage = "Press and hold F to buy " + weaponName + " ammo for " + refillAmmoPrice + " points";
 
         GameObject displayWeapon = Instantiate(weapon.GetComponent<PlayerGun>().displayModel, transform.position, transform.rotation, transform);
+        displayWeapon.transform.localPosition = weapon.GetComponent<PlayerGun>().displaySpawnPoint;
         
         displayWeapon.layer = 0; //take it out of WeaponCam layer so player cannot see it through walls.
         
         for(int i = 0; i < displayWeapon.transform.childCount; i++)
         {
-            displayWeapon.transform.GetChild(i).gameObject.layer = 0;
+            Transform child = displayWeapon.transform.GetChild(i);
+            child.gameObject.layer = 0;
+            if(child.childCount > 0)
+            {
+                for(int j = 0; j < child.childCount; j++)
+                {
+                    child.GetChild(j).gameObject.layer = 0;
+                }
+            }
         }
     }
 
@@ -61,6 +70,14 @@ public class WallBuyWeapon : InteractableObject
 
             if(slotPlayerHasWeapon != -1)
             {
+                if(!player.IsWeaponAtMaxAmmo(slotPlayerHasWeapon))
+                {
+                    currentlyInteractable = true;
+                }
+                else
+                {
+                    currentlyInteractable = false;
+                }
                 price = refillAmmoPrice;
                 interactMessage = refillWeaponMessage;
             }

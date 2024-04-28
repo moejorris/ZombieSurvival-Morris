@@ -46,6 +46,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [SerializeField] Sprite inactiveAmmoSprite;
     [Header("Wall Buy References")]
     [SerializeField] public GameObject displayModel;
+    [SerializeField] public Vector3 displaySpawnPoint;
     // [SerializeField] Sprite crosshair; crosshair is no longer controlled by weapon.
     // [SerializeField] UiAmmoController uiAmmoController; //Reference to the UiAmmoController to tell it when to update.
 
@@ -268,6 +269,15 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
             UiAmmoController.instance.UpdateAmmo(currentAmmo, currentReserveAmmo);
         }
         // weaponAnimator.SetTrigger("Up");
+    }
+
+    public bool CheckIfWeaponAtMaxAmmo()
+    {
+        if(currentReserveAmmo == clipSize*startingReserveMagazines)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void RefillReserveAmmo()
