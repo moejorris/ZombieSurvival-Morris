@@ -441,14 +441,15 @@ MonoBehaviour:
   reloadButton: 114
   weaponAnimator: {fileID: 645070736442078461}
   audioSource: {fileID: 9048440353758888965}
+  unlimitedAmmo: 0
   clipSize: 8
   startingReserveMagazines: 4
   currentAmmo: 0
   currentReserveAmmo: 0
   fullAuto: 0
-  maxSpread: 2
+  maxSpread: 6
   aimSpreadMultiplier: 0.1
-  damageToInflict: 25
+  damageToInflict: 20
   maxDistance: 100
   shootableObjects:
     serializedVersion: 2
@@ -462,6 +463,8 @@ MonoBehaviour:
   activeAmmoSprite: {fileID: 21300000, guid: bd2d857c2370bfc488184f31cdf5686d, type: 3}
   inactiveAmmoSprite: {fileID: 21300000, guid: 1209965bb5c2a3c4e8157d71a577419b, type: 3}
   displayModel: {fileID: 920860107079602937}
+  displaySpawnPoint: {x: 0, y: 0, z: 0}
+  canShoot: 0
 --- !u!82 &9048440353758888965
 AudioSource:
   m_ObjectHideFlags: 0

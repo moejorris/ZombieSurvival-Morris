@@ -50,7 +50,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     // [SerializeField] Sprite crosshair; crosshair is no longer controlled by weapon.
     // [SerializeField] UiAmmoController uiAmmoController; //Reference to the UiAmmoController to tell it when to update.
 
-    bool canShoot;
+    [SerializeField] bool canShoot;
     bool reloading;
     bool isAiming;
     bool paused;

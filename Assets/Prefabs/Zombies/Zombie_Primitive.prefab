@@ -179,6 +179,7 @@ MonoBehaviour:
   barrierRemovalRate: 2
   damageToPlayer: 30
   attackPlayerRate: 1
+  currentEntrance: {fileID: 0}
 --- !u!1 &399916135106206328
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +325,7 @@ MonoBehaviour:
   dismemberedScale: {x: 0, y: 0, z: 0}
   canBeDestroyed: 0
   deathOnDestroyed: 0
-  timeUntilDeathAfterLimbDestruction: 1
+  maxTimeUntilDeathAfterLimbDestruction: 3
   limbHealth: 0
   damageMultiplier: 1
   scoreOnShoot: 10
@@ -534,7 +535,7 @@ MonoBehaviour:
   dismemberedScale: {x: 0, y: 0, z: 0}
   canBeDestroyed: 0
   deathOnDestroyed: 0
-  timeUntilDeathAfterLimbDestruction: 1
+  maxTimeUntilDeathAfterLimbDestruction: 3
   limbHealth: 50
   damageMultiplier: 0.25
   scoreOnShoot: 10
@@ -745,9 +746,9 @@ MonoBehaviour:
   dismemberedScale: {x: 0, y: 0, z: 0}
   canBeDestroyed: 0
   deathOnDestroyed: 0
-  timeUntilDeathAfterLimbDestruction: 1
+  maxTimeUntilDeathAfterLimbDestruction: 3
   limbHealth: 0
-  damageMultiplier: 0.75
+  damageMultiplier: 1
   scoreOnShoot: 5
 --- !u!1 &3125669084360451989
 GameObject:
@@ -872,9 +873,9 @@ MonoBehaviour:
   dismemberedScale: {x: 0, y: 0, z: 0}
   canBeDestroyed: 1
   deathOnDestroyed: 0
-  timeUntilDeathAfterLimbDestruction: 1
+  maxTimeUntilDeathAfterLimbDestruction: 3
   limbHealth: 50
-  damageMultiplier: 0.25
+  damageMultiplier: 1
   scoreOnShoot: 10
 --- !u!1 &3246028364794902764
 GameObject:
@@ -1107,9 +1108,9 @@ MonoBehaviour:
   dismemberedScale: {x: 0, y: 0, z: 0}
   canBeDestroyed: 0
   deathOnDestroyed: 0
-  timeUntilDeathAfterLimbDestruction: 1
+  maxTimeUntilDeathAfterLimbDestruction: 3
   limbHealth: 0
-  damageMultiplier: 0.75
+  damageMultiplier: 1
   scoreOnShoot: 5
 --- !u!1 &4226448724554132742
 GameObject:
@@ -1373,7 +1374,7 @@ MonoBehaviour:
   dismemberedScale: {x: 0, y: 0, z: 0}
   canBeDestroyed: 0
   deathOnDestroyed: 0
-  timeUntilDeathAfterLimbDestruction: 1
+  maxTimeUntilDeathAfterLimbDestruction: 3
   limbHealth: 50
   damageMultiplier: 0.25
   scoreOnShoot: 10
@@ -1711,9 +1712,9 @@ MonoBehaviour:
   dismemberedScale: {x: 0, y: 0, z: 0}
   canBeDestroyed: 1
   deathOnDestroyed: 1
-  timeUntilDeathAfterLimbDestruction: 3
-  limbHealth: 20
-  damageMultiplier: 1.75
+  maxTimeUntilDeathAfterLimbDestruction: 3
+  limbHealth: 100
+  damageMultiplier: 3
   scoreOnShoot: 25
 --- !u!1 &8696228035834089098
 GameObject:
@@ -1838,7 +1839,7 @@ MonoBehaviour:
   dismemberedScale: {x: 0, y: 0, z: 0}
   canBeDestroyed: 1
   deathOnDestroyed: 0
-  timeUntilDeathAfterLimbDestruction: 1
+  maxTimeUntilDeathAfterLimbDestruction: 3
   limbHealth: 50
-  damageMultiplier: 0.25
+  damageMultiplier: 1
   scoreOnShoot: 10
