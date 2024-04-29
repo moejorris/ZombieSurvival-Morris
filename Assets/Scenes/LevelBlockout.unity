@@ -27839,6 +27839,19 @@ MonoBehaviour:
   holdInteractKey: 1
   interactMessage: Press F to buy a random weapons
   price: 0
+  displayWeaponPosition: {fileID: 965390355}
+  wonderWeaponPool:
+  - {fileID: 4173990491179368116, guid: 5064881358d5af34db324a46e714f942, type: 3}
+  - {fileID: 8190336006335392918, guid: 9345f5251a7587f4998f5fc21de4d094, type: 3}
+  weaponPool:
+  - {fileID: 3893397197154613136, guid: 69bce332185f9a440b20a02b73298c58, type: 3}
+  - {fileID: 8787670767696897616, guid: bfbfd6b58b823984a81138ca2bd4f9c0, type: 3}
+  - {fileID: 830610602103467978, guid: 53198157ead655b439410b67ac3e5190, type: 3}
+  - {fileID: 9182374797675713845, guid: f777c37f732e0fa4bb033d50457639d5, type: 3}
+  - {fileID: 9182374797675713845, guid: 54bbb7af7a728a34bbd43f8debbcb3f8, type: 3}
+  - {fileID: 4173990491179368116, guid: ce0810eee8082d84ab3a8c74fffae9bd, type: 3}
+  - {fileID: 6394225331575852899, guid: 39b354aef9cbf84438c287a89bf75cbb, type: 3}
+  weaponsToDisplay: 5
 --- !u!4 &1996836238
 Transform:
   m_ObjectHideFlags: 0
