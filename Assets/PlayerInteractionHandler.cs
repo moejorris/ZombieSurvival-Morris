@@ -45,9 +45,10 @@ public class PlayerInteractionHandler : MonoBehaviour
             return;
         }
 
+        UpdateInteractText();
+
         if(!currentInteractable.currentlyInteractable)
         {
-            UpdateInteractText();
             return;
         }
 
