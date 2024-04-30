@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerWeaponManager : MonoBehaviour
 {
+    public static PlayerWeaponManager instance;
     [SerializeField] Transform weaponHolderTransform;
     [SerializeField] List<GameObject> weaponInventory = new List<GameObject>();
     [SerializeField] int currentWeaponIndex;
@@ -13,6 +14,8 @@ public class PlayerWeaponManager : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
+        
         for(int i = 0; i < maxWeapons; i++)
         {
             weaponInventory.Add(null);
@@ -73,9 +76,22 @@ public class PlayerWeaponManager : MonoBehaviour
         return weaponInventory[slotWeaponIsIn].GetComponent<PlayerGun>().CheckIfWeaponAtMaxAmmo();
     }
 
-    public void RefillWeaponAmmo(int slotWeaponIsIn)
+    public void RefillWeaponAmmo(int slotWeaponIsIn = -1)
     {
+        if(slotWeaponIsIn == -1)
+        {
+            slotWeaponIsIn = currentWeaponIndex;
+        }
+
         weaponInventory[slotWeaponIsIn].GetComponent<PlayerGun>().RefillReserveAmmo();
+    }
+
+    public void RefillAllAmmo()
+    {
+        for(int i = 0; i < weaponInventory.Count; i++)
+        {
+            weaponInventory[i].GetComponent<PlayerGun>().RefillReserveAmmo();
+        }
     }
 
     public int CheckIfPlayerHasGun(string weaponName) //checks if player has the gun being inputted and returns the slot it is in. returns -1 if player does not have it.

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MysteryBox : InteractableObject
@@ -9,26 +10,49 @@ public class MysteryBox : InteractableObject
     [SerializeField] Transform displayWeaponParent;
     [SerializeField] GameObject[] wonderWeaponPool;
     [SerializeField] GameObject[] weaponPool;
-    [SerializeField] int weaponsToDisplay = 2;
-    [SerializeField] bool addAllWeaponsToDisplay;
-    PlayerGun weaponWon; //the weapon the player will actually receive. 
+    int weaponsToDisplay = 2;
+    PlayerGun weaponWon; //the weapon the player will actually receive.
+    int buyPrice;
     bool cycleWeapons = false;
+
+    void Start()
+    {
+        interactMessage = buyMessage;
+        buyPrice = price;
+    }
     public override void Interact()
     {
-        GetComponent<AudioSource>().Play();
-        GetComponent<Animator>().SetTrigger("Activate");
-        currentlyInteractable = false;
-        StartCoroutine(CycleDisplayWeapons());
+        if(interactMessage == buyMessage)
+        {
+            GetComponent<AudioSource>().Play();
+            GetComponent<Animator>().SetTrigger("Activate");
+            currentlyInteractable = false;
+            StartCoroutine(CycleDisplayWeapons());
+        }
+        else if(interactMessage == pickMessage)
+        {
+            PlayerWeaponManager.instance.GainWeapon(weaponWon.gameObject);
+            currentlyInteractable = false;
+            DestroyDisplayWeapons();
+            GetComponent<Animator>().SetTrigger("Close");
+        }
     }
 
     public void StopCyclingWeaponModels()
     {
         cycleWeapons = false;
+        currentlyInteractable = true;
+        interactMessage = pickMessage;
+        price = 0;
+        DestroyDisplayWeapons();
+        ShowWeaponToBeGiven();
     }
 
     public void Done()
     {
         currentlyInteractable = true;
+        interactMessage = buyMessage;
+        price = buyPrice;
         DestroyDisplayWeapons();
     }
 
@@ -42,24 +66,42 @@ public class MysteryBox : InteractableObject
 
     void ShowWeaponToBeGiven()
     {
-        GameObject weapon = null;
+        //create duplicate lists and remove weapons player already has
+        List<GameObject> currentWonderWeaponPool = wonderWeaponPool.ToList();
+        List<GameObject> currentWeaponPool = weaponPool.ToList();
+
+        for(int i = 0; i < currentWonderWeaponPool.Count; i++)
+        {
+            if(PlayerWeaponManager.instance.CheckIfPlayerHasGun(currentWonderWeaponPool[i].GetComponent<PlayerGun>().GetWeaponName()) != -1)
+            {
+                Debug.Log("Player has this gun. removing " + currentWonderWeaponPool[i].name + " from pool");
+                currentWonderWeaponPool.Remove(currentWonderWeaponPool[i]);
+            }
+        }
+
+        for(int i = 0; i < currentWeaponPool.Count; i++)
+        {
+            if(PlayerWeaponManager.instance.CheckIfPlayerHasGun(currentWeaponPool[i].GetComponent<PlayerGun>().GetWeaponName()) != -1)
+            {
+                Debug.Log("Player has this gun. removing " + currentWeaponPool[i].name + " from pool");
+                currentWeaponPool.Remove(currentWeaponPool[i]);
+            }
+        }
 
         //decide if player gets a wonder weapon
         bool wonderWeapon = Random.Range(0f, 1f) > 0.9f; //90% chance of getting a wonder weapon (raygun only right now)
         //choose random weapon
         if(wonderWeapon)
         {
-            weapon = wonderWeaponPool[Random.Range(0, wonderWeaponPool.Length)];
+            weaponWon = currentWonderWeaponPool[Random.Range(0, currentWonderWeaponPool.Count)].GetComponent<PlayerGun>();
         }
         else
         {
-            weapon = weaponPool[Random.Range(0, weaponPool.Length)];
+            weaponWon = currentWeaponPool[Random.Range(0, currentWeaponPool.Count)].GetComponent<PlayerGun>();
         }
-        weaponWon = weapon.GetComponent<PlayerGun>();
         //instantiate weapon
-        AddDisplayWeapon(weaponWon.displayModel, weaponWon.displaySpawnPoint, true);
+        AddDisplayWeapon(Instantiate(weaponWon.displayModel), weaponWon.displaySpawnPoint, true);
         //currently interactable to true
-        currentlyInteractable = true;
     }
 
 
@@ -67,10 +109,7 @@ public class MysteryBox : InteractableObject
     {
         Debug.Log("Pick random weapons to display");
 
-        if(addAllWeaponsToDisplay || weaponsToDisplay > weaponPool.Length)
-        {
-            weaponsToDisplay = weaponPool.Length;
-        }
+        weaponsToDisplay = weaponPool.Length;
 
         int weaponsAdded = 0;
 
@@ -157,8 +196,5 @@ public class MysteryBox : InteractableObject
             displayWeaponParent.GetChild(i).gameObject.SetActive(true);
             yield return new WaitForSeconds(0.25f);
         }
-        DestroyDisplayWeapons();
-        ShowWeaponToBeGiven();
-
     }
 }

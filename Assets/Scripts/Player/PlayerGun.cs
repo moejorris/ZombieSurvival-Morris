@@ -1,5 +1,5 @@
 //////////////////////////////////////////////
-//Assignment/Lab/Project: Collision Resolution
+//Assignment/Lab/Project: Zombie Survival / Final Project
 //Name: Joe Morris
 //Section: SGD.213.0021
 //Instructor: Professor Locklear

@@ -66,6 +66,7 @@ public class PlayerManager : MonoBehaviour
         if(GetComponentInChildren<PlayerGun>()) GetComponentInChildren<PlayerGun>().Pause(!active);
         if(GetComponentInChildren<Animator>()) GetComponentInChildren<Animator>().enabled = active;
         GetComponent<PlayerHealth>().enabled = active;
+        GetComponent<PlayerWeaponManager>().enabled = active;
         UpdateAudioSourceSpeed();
     }
 

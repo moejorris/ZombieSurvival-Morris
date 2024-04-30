@@ -13,8 +13,9 @@ public class WallBuyWeapon : InteractableObject
     [SerializeField] int refillAmmoPrice;
     [SerializeField] GameObject weapon;
     string weaponName;
-    PlayerWeaponManager player;
     int slotPlayerHasWeapon;
+
+    PlayerWeaponManager player;
 
     void Start()
     {
@@ -42,6 +43,8 @@ public class WallBuyWeapon : InteractableObject
                 }
             }
         }
+
+        player = PlayerWeaponManager.instance;
     }
 
     public override void Interact()
@@ -58,34 +61,30 @@ public class WallBuyWeapon : InteractableObject
 
     void OnTriggerEnter(Collider other)
     {
-        UpdatePrice(other.GetComponent<PlayerWeaponManager>());
+        UpdatePrice();
     }
 
-    void UpdatePrice(PlayerWeaponManager playerWeaponManager)
+    void UpdatePrice()
     {
-        if(playerWeaponManager)
-        {
-            player = playerWeaponManager;
-            slotPlayerHasWeapon = player.CheckIfPlayerHasGun(weaponName);
+        slotPlayerHasWeapon = player.CheckIfPlayerHasGun(weaponName);
 
-            if(slotPlayerHasWeapon != -1)
+        if(slotPlayerHasWeapon != -1)
+        {
+            if(!player.IsWeaponAtMaxAmmo(slotPlayerHasWeapon))
             {
-                if(!player.IsWeaponAtMaxAmmo(slotPlayerHasWeapon))
-                {
-                    currentlyInteractable = true;
-                }
-                else
-                {
-                    currentlyInteractable = false;
-                }
-                price = refillAmmoPrice;
-                interactMessage = refillWeaponMessage;
+                currentlyInteractable = true;
             }
             else
             {
-                price = buyPrice;
-                interactMessage = buyWeaponMessage;
+                currentlyInteractable = false;
             }
+            price = refillAmmoPrice;
+            interactMessage = refillWeaponMessage;
+        }
+        else
+        {
+            price = buyPrice;
+            interactMessage = buyWeaponMessage;
         }
     }
 }
