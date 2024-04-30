@@ -19,8 +19,9 @@ public class ZombieHealth : MonoBehaviour
     {
         Debug.Log("Death!");
         GetComponent<ZombieAttack>().OnDeath();
-        gameObject.SetActive(false);
-
+        // gameObject.SetActive(false);
+        Destroy(gameObject);
+        ZombieSpawnManager.instance.CheckForRoundOver();
         //Let roundManager know zombie has died
     }
 }

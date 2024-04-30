@@ -3,12 +3,13 @@
 //Name: Joe Morris
 //Section: SGD.213.0021
 //Instructor: Professor Locklear
-//Date: 03/18/2024
+//Date: 05/02/2024
 /////////////////////////////////////////////
 
 using UnityEngine;
 public class PlayerGun : MonoBehaviour //This script is setup to work without Sound effects (audioClip and audioSource), Ui, and Particle Effects if they are not needed. 
 {
+    //To do: make shooting run a coroutine/loop that shoots multiple raycasts when using weapons that fire multiple projectiles (like shotgun)
     [Header("Input")]
     [SerializeField] KeyCode reloadButton = KeyCode.R;
     

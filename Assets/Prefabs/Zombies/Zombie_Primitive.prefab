@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  running: 1
+  running: 0
   attackTriggerDistance: 2
   walkSpeed: 1.8
   runSpeed: 4.5

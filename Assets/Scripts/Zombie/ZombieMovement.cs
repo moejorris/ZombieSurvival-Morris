@@ -24,6 +24,7 @@ public class ZombieMovement : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         currentState = ZombieState.walk;
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        navMeshAgent.Warp(transform.position);
     }
 
     void FixedUpdate()
