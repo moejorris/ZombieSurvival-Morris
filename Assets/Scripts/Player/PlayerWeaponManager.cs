@@ -21,7 +21,6 @@ public class PlayerWeaponManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(weaponInventory[0] == null);
         GainWeapon(defaultWeapon);
     }
 

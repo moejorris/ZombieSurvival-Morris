@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4311510677479697050}
   - component: {fileID: 5110571893760471516}
   - component: {fileID: 7021686262636266298}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rearBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3696462522137696596}
   - component: {fileID: 6367788782962581272}
   - component: {fileID: 3307855939844568290}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RearSight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5416905609067591056}
   - component: {fileID: 6961892885814831389}
   - component: {fileID: 682937637657664355}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4665793172381386614}
   - component: {fileID: 7022881594932423173}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 483108158791866846}
   - component: {fileID: 4949921998699083004}
   - component: {fileID: 6524587042867441918}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FrontSight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5725891797009720227}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MuzzleFlashPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,7 +433,7 @@ GameObject:
   - component: {fileID: 6694443079513688663}
   - component: {fileID: 7327935861858005876}
   - component: {fileID: 6102826216268294357}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_M1Garand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
