@@ -263,7 +263,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 5, z: 3}
-  m_Center: {x: -0.75, y: -0.5, z: 0}
+  m_Center: {x: 0.75, y: -0.5, z: 0}
 --- !u!114 &8200734983297373119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,7 +377,6 @@ MonoBehaviour:
   - {fileID: 7643267782076932166}
   navMeshObstacle: {fileID: 4784137136536268141}
   alreadyRunning: 0
-  currentZombie: {fileID: 0}
 --- !u!208 &4784137136536268141
 NavMeshObstacle:
   m_ObjectHideFlags: 0

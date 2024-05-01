@@ -10,6 +10,8 @@ using System;
 using UnityEngine;
 public class PlayerGun : MonoBehaviour //This script is setup to work without Sound effects (audioClip and audioSource), Ui, and Particle Effects if they are not needed. 
 {
+    public static PlayerGun currentGun;
+
     //To do: make shooting run a coroutine/loop that shoots multiple raycasts when using weapons that fire multiple projectiles (like shotgun)
     [Header("Input")]
     [SerializeField] KeyCode reloadButton = KeyCode.R;
@@ -55,7 +57,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
     [SerializeField] bool canShoot;
     bool reloading;
-    bool isAiming;
+    public bool isAiming;
     bool paused;
 
     public void Pause(bool isPaused)
@@ -75,6 +77,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     }
     void OnEnable()
     {
+        currentGun = this;
         canShoot = false;
         reloading = false;
         UpdateUi();
@@ -240,7 +243,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
         RaycastHit[] hits = Physics.RaycastAll(ray, maxDistance, shootableObjects, QueryTriggerInteraction.Ignore);
 
-        Array.Sort(hits, delegate(RaycastHit hit1, RaycastHit hit2) 
+        Array.Sort(hits, delegate(RaycastHit hit1, RaycastHit hit2) //sorts through the list by distance (raycast all order is random/not sorted by default)
         {
             return hit1.distance.CompareTo(hit2.distance); 
         }

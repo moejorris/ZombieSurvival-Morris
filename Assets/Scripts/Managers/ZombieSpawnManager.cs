@@ -9,7 +9,6 @@ public class ZombieSpawnManager : MonoBehaviour
     public static ZombieSpawnManager instance;
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] GameObject zombiePrefab;
-    // [SerializeField] List<GameObject> zombiesAlive = new List<GameObject>();
 
     int zombiesSpawned = 0;
     int zombiesAlive = 0;
@@ -20,14 +19,17 @@ public class ZombieSpawnManager : MonoBehaviour
         instance = this;
     }
 
+    //FIX MORE THAN TOLD ZOMBIES SPAWNING PER ROUND
+    //CHECK IF ZOMBIES ARE SPAWNING IN TUNNEL BEFORE ROOM IS ACCESSIBLE
     public IEnumerator SpawnZombies(float health, int targetSpawnCount, int maxZombiesAlive, float spawnRate, int amountOfRunningZombies)
     {
         currentZombiesToSpawn = targetSpawnCount;
+        zombiesAlive = 0; //should fix too many zombies spawning
         zombiesSpawned = 0;
         zombiesKilled = 0;
         // int runnersSpawned = 0;
 
-        while(zombiesSpawned <= currentZombiesToSpawn)
+        while(zombiesSpawned < currentZombiesToSpawn)
         {
             GameObject newZombie;
 
@@ -55,6 +57,16 @@ public class ZombieSpawnManager : MonoBehaviour
     {
         //get all spawn points
         List<Transform> closestSpawnPoints = spawnPoints.ToList();
+
+        for(int i = closestSpawnPoints.Count - 1; i >= 0; i--) //starts at the top of the list and removes all spawn points that are inactive (spawn points that are inactive due to zombies being unable to reach the player until a room is opened)
+        {
+            if(!closestSpawnPoints[i].gameObject.activeInHierarchy)
+            {
+                Debug.Log(closestSpawnPoints[i].name);
+                closestSpawnPoints.Remove(closestSpawnPoints[i]);
+            }
+        }
+
         //get player position
         Vector3 playerPosition = PlayerManager.instance.transform.position;
         //sort through list by closest to the player
@@ -65,8 +77,6 @@ public class ZombieSpawnManager : MonoBehaviour
 
     public void CheckForRoundOver()
     {
-        
-        
         zombiesAlive--;
         zombiesKilled++;
         
