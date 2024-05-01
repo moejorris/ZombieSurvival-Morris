@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] KeyCode jumpButton = KeyCode.Space;
     [SerializeField] KeyCode sprintButton = KeyCode.LeftShift;
     CharacterController controller;
-    [SerializeField] float walkSpeed, runSpeed, gravityMult, jumpForce, floorStickForce, speedChangeFactor;
+    [SerializeField] float adsSpeed, walkSpeed, runSpeed, gravityMult, jumpForce, floorStickForce, speedChangeFactor;
     float gravity = 9.8f, yVel;
     float curMoveSpeed;
     bool jumpTrigger, isGrounded;
@@ -46,7 +46,12 @@ public class PlayerMove : MonoBehaviour
     {
         if(!controller.isGrounded) return curMoveSpeed;
         float targetSpeed;
-        if(Input.GetKey(sprintButton) && controller.isGrounded && yInput > 0)
+
+        if(PlayerGun.currentGun.isAiming && controller.isGrounded)
+        {
+            targetSpeed = adsSpeed;
+        }
+        else if(Input.GetKey(sprintButton) && controller.isGrounded && yInput > 0)
         {
             targetSpeed = runSpeed;
         }

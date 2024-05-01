@@ -9,8 +9,8 @@ public class FOVController : MonoBehaviour
     [SerializeField] float increaseSpeedFOV = 100f, decreaseSpeedFOV = 75f;
     [HideInInspector] public float targetFOV;
     [SerializeField] Camera[] additionalCameras;
-    float adsFOV = 0.75f;
-    float currentFOV = 0;
+    [SerializeField] float adsFOVMultiplier = 0.75f;
+    float currentADSfov;
     Camera viewCam;
 
     // Start is called before the first frame update
@@ -18,7 +18,6 @@ public class FOVController : MonoBehaviour
     {
         viewCam = Camera.main;
         targetFOV = FOV;
-        adsFOV = FOV*0.75f;
     }
 
     void LateUpdate()
@@ -42,14 +41,23 @@ public class FOVController : MonoBehaviour
     void ChangeCamFov(float fov)
     {
         // float changeSmooth = Mathf.Lerp(viewCam.fieldOfView, fov, Time.deltaTime);
-        float changeSmooth = fov;
-        
-        viewCam.fieldOfView = changeSmooth;
+        if(PlayerGun.currentGun.isAiming)
+        {
+            fov *= adsFOVMultiplier;
+
+            fov = Mathf.Lerp(viewCam.fieldOfView, fov, Time.deltaTime * 7f);
+        }
+        else
+        {
+            fov = Mathf.Lerp(viewCam.fieldOfView, fov, Time.deltaTime * 14);
+        }
+
+        viewCam.fieldOfView = fov;
         if(additionalCameras.Length > 0)
         {
             for(int i = 0; i < additionalCameras.Length; i++)
             {
-                additionalCameras[i].fieldOfView = changeSmooth;
+                additionalCameras[i].fieldOfView = fov;
             }
         }
     }

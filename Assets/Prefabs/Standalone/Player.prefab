@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpButton: 32
   sprintButton: 304
+  adsSpeed: 2.25
   walkSpeed: 4.5
   runSpeed: 7
   gravityMult: 0.75
@@ -254,6 +255,7 @@ MonoBehaviour:
   targetFOV: 0
   additionalCameras:
   - {fileID: 5817630523774338527}
+  adsFOVMultiplier: 0.75
 --- !u!114 &1847526936214102534
 MonoBehaviour:
   m_ObjectHideFlags: 0

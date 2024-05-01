@@ -15,7 +15,7 @@ public class PlayerWeaponManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        
+
         for(int i = 0; i < maxWeapons; i++)
         {
             weaponInventory.Add(null);
@@ -31,7 +31,6 @@ public class PlayerWeaponManager : MonoBehaviour
     {
         if(weaponInventory[0] == null)
         {
-            Debug.Log("player has no weapons: " + 0);
             return 0;
         }
 
