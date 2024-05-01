@@ -43,8 +43,12 @@ public class RoundManager : MonoBehaviour
 
         currentRound++;
 
+        UiController.instance.UpdateRoundText(currentRound);
+
         //if the current round is past the max number of entries in the zombiesToSpawnPerRound array, then the max number of zombies to spawn each round will be used for the zombie count.
         int zombiesThisRound = currentRound >= zombiesToSpawnPerRound.Length ? maxNumberOfZombiesToSpawnPerRound : zombiesToSpawnPerRound[currentRound];
+        
+        UiController.instance.UpdateZombiesLeftText(zombiesThisRound);
 
         if(currentRound > 1)
         {

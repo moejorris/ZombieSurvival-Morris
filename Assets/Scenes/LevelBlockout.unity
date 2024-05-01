@@ -16652,7 +16652,7 @@ GameObject:
   - component: {fileID: 1185820673}
   - component: {fileID: 1185820672}
   m_Layer: 7
-  m_Name: Cube (1)
+  m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19315,7 +19315,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1363599767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1210745204
 GameObject:
@@ -20379,6 +20379,7 @@ Transform:
   m_Children:
   - {fileID: 843648758}
   - {fileID: 1412738166}
+  - {fileID: 1185820677}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1385990134 stripped
@@ -21300,10 +21301,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 631146418089765275, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1548812196277958580, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -21315,14 +21312,6 @@ PrefabInstance:
     - target: {fileID: 5741785625900266200, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
       propertyPath: m_Name
       value: UiCanvas_Controller
-      objectReference: {fileID: 0}
-    - target: {fileID: 5741785625900266200, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8136854865934357740, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9212824172848245495, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
       propertyPath: m_Pivot.x
@@ -34223,7 +34212,6 @@ SceneRoots:
   - {fileID: 92802075}
   - {fileID: 1773776145}
   - {fileID: 847783177}
-  - {fileID: 1185820677}
   - {fileID: 6313149034634048678}
   - {fileID: 7776818268547865490}
   - {fileID: 18571988}

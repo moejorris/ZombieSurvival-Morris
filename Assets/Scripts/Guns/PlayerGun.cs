@@ -6,6 +6,7 @@
 //Date: 05/02/2024
 /////////////////////////////////////////////
 
+using System;
 using UnityEngine;
 public class PlayerGun : MonoBehaviour //This script is setup to work without Sound effects (audioClip and audioSource), Ui, and Particle Effects if they are not needed. 
 {
@@ -36,6 +37,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [SerializeField] Transform muzzleFlashTransform; //The transform of the empty located at the end of the weapons barrel
     [SerializeField] GameObject muzzleFlashPrefab; //The prefab of the muzzle flash particle effect
     [SerializeField] GameObject impactEffectPrefab; //The prefab of the bullet impact particle effect
+    [SerializeField] GameObject bloodEffectPrefab;
 
     [Header("Audio")] //Optional sound effects for shooting and reloading.
     [SerializeField] AudioClip shootSound;
@@ -181,29 +183,13 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
             UiAmmoController.instance.UpdateAmmo(currentAmmo, currentReserveAmmo);
         }
 
-        ShootRaycast();
+        ShootRaycastBulletPenetration();
     }
 
     void ShootRaycast() //Shoots raycast from the center of the screen. If it hits anything, inflicts damage (if object has Health) and spawns the bullet impact effect on it.
     {
-        float curSpread = maxSpread / 100f;
-        float curAimSpread = isAiming ? aimSpreadMultiplier : 1;
-
-        Vector3 bulletTrajectory = Camera.main.transform.forward;
-
-        Vector3 spreadOffset =  
-        (Camera.main.transform.right * Random.Range(-curSpread, curSpread) * curAimSpread) + 
-        (Camera.main.transform.up * Random.Range(-curSpread, curSpread) * curAimSpread);
-
-        if(Mathf.Abs(spreadOffset.magnitude) > curSpread)
-        {
-            spreadOffset = spreadOffset.normalized * curSpread;
-        }
-
-        bulletTrajectory += spreadOffset;
-
         RaycastHit hit;
-        Ray ray = new Ray(Camera.main.transform.position, bulletTrajectory);
+        Ray ray = new Ray(Camera.main.transform.position, DetermineBulletTrajectory());
 
         if(Physics.Raycast(ray, out hit, maxDistance, shootableObjects, QueryTriggerInteraction.Ignore))
         {
@@ -223,6 +209,84 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
             {
                 GameObject bulletImpact = Instantiate(impactEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal), hit.transform);
                 bulletImpact.transform.position = bulletImpact.transform.position + (bulletImpact.transform.forward * 0.1f); //slightly moves the PE outward from the surface so the bullet holes are visible
+            }
+        }
+    }
+
+    Vector3 DetermineBulletTrajectory()
+    {
+        float curSpread = maxSpread / 100f;
+        float curAimSpread = isAiming ? aimSpreadMultiplier : 1;
+
+        Vector3 bulletTrajectory = Camera.main.transform.forward;
+
+        Vector3 spreadOffset =  
+        (Camera.main.transform.right * UnityEngine.Random.Range(-curSpread, curSpread) * curAimSpread) + 
+        (Camera.main.transform.up * UnityEngine.Random.Range(-curSpread, curSpread) * curAimSpread);
+
+        if(Mathf.Abs(spreadOffset.magnitude) > curSpread)
+        {
+            spreadOffset = spreadOffset.normalized * curSpread;
+        }
+
+        bulletTrajectory += spreadOffset;
+
+        return bulletTrajectory;
+    }
+
+    void ShootRaycastBulletPenetration() //Shoots raycast from the center of the screen. If it hits anything, inflicts damage (if object has Health) and spawns the bullet impact effect on it. Uses raycast all so your bullets can go through zombies.
+    {
+        Ray ray = new Ray(Camera.main.transform.position, DetermineBulletTrajectory());
+
+        RaycastHit[] hits = Physics.RaycastAll(ray, maxDistance, shootableObjects, QueryTriggerInteraction.Ignore);
+
+        Array.Sort(hits, delegate(RaycastHit hit1, RaycastHit hit2) 
+        {
+            return hit1.distance.CompareTo(hit2.distance); 
+        }
+        );
+        
+        if(hits.Length > 0) //maxDistance, shootableObjects, QueryTriggerInteraction.Ignore))
+        {
+            float currentDamage = damageToInflict;
+
+            for(int i = 0; i < hits.Length; i++)
+            {
+                string consoleMessage = "item " + i + ": " + hits[i].transform.name;
+                if(hits[i].transform.parent)
+                {
+                    consoleMessage+= " " + hits[i].transform.parent.name;
+                }
+                Debug.Log(consoleMessage);
+                if(i > 0)
+                {
+                    currentDamage*= 0.5f;
+                }
+
+                if(hits[i].collider.GetComponent<ZombieLimb>())
+                {
+                    hits[i].collider.GetComponent<ZombieLimb>().TakeDamage(currentDamage);
+                    Debug.Log("Hit Zombie: " + hits[i].transform.name);
+                    if(UiController.instance != null) //&& i < 1
+                    {
+                        UiController.instance.Invoke("SpawnHitmarker", 0.05f);
+                    }
+
+                    if(bloodEffectPrefab != null && hits[i].point != null) //Instantiate bullet impact particle effect on hit object
+                    {
+                        GameObject bulletImpact = Instantiate(impactEffectPrefab, hits[i].point, Quaternion.LookRotation(hits[i].normal), hits[i].transform);
+                        bulletImpact.transform.position = bulletImpact.transform.position + (bulletImpact.transform.forward * 0.1f); //slightly moves the PE outward from the surface so the bullet holes are visible
+                    }
+                }
+                else //the first collision with a non-zombie stops the for loop so you can't shoot zombies through walls, only through zombies.
+                {
+                    if(impactEffectPrefab != null && hits[i].point != null) //Instantiate bullet impact particle effect on hit object
+                    {
+                        GameObject bulletImpact = Instantiate(impactEffectPrefab, hits[i].point, Quaternion.LookRotation(hits[i].normal), hits[i].transform);
+                        bulletImpact.transform.position = bulletImpact.transform.position + (bulletImpact.transform.forward * 0.1f); //slightly moves the PE outward from the surface so the bullet holes are visible
+                    }
+                    // return;
+                }
             }
         }
     }

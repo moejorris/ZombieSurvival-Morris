@@ -14,6 +14,7 @@ public class ZombieSpawnManager : MonoBehaviour
     int zombiesSpawned = 0;
     int zombiesAlive = 0;
     int currentZombiesToSpawn = 0;
+    int zombiesKilled = 0;
     void Awake()
     {
         instance = this;
@@ -23,9 +24,10 @@ public class ZombieSpawnManager : MonoBehaviour
     {
         currentZombiesToSpawn = targetSpawnCount;
         zombiesSpawned = 0;
+        zombiesKilled = 0;
         // int runnersSpawned = 0;
 
-        while(zombiesSpawned < currentZombiesToSpawn)
+        while(zombiesSpawned <= currentZombiesToSpawn)
         {
             GameObject newZombie;
 
@@ -33,6 +35,7 @@ public class ZombieSpawnManager : MonoBehaviour
             {
                 Vector3 spawnPoint = GetOneOfThreeClosestSpawnPoints();
                 newZombie = Instantiate(zombiePrefab, spawnPoint, Quaternion.identity);
+                newZombie.name = "Zombie " + zombiesSpawned; 
                 
                 newZombie.GetComponent<ZombieHealth>().health = health;
                 zombiesSpawned++;
@@ -62,8 +65,14 @@ public class ZombieSpawnManager : MonoBehaviour
 
     public void CheckForRoundOver()
     {
+        
+        
         zombiesAlive--;
-        if(zombiesAlive < 1 && zombiesSpawned >= currentZombiesToSpawn) //check if all zombies have spawned and all zombies are dead
+        zombiesKilled++;
+        
+        UiController.instance.UpdateZombiesLeftText(currentZombiesToSpawn - zombiesKilled);
+        
+        if(zombiesKilled >= currentZombiesToSpawn) //check if all zombies have spawned and all zombies are dead
         {
             RoundManager.instance.RoundOver();
         }
