@@ -19,15 +19,13 @@ public class ZombieSpawnManager : MonoBehaviour
         instance = this;
     }
 
-    //FIX MORE THAN TOLD ZOMBIES SPAWNING PER ROUND
-    //CHECK IF ZOMBIES ARE SPAWNING IN TUNNEL BEFORE ROOM IS ACCESSIBLE
+
     public IEnumerator SpawnZombies(float health, int targetSpawnCount, int maxZombiesAlive, float spawnRate, bool runningZombies)
     {
         currentZombiesToSpawn = targetSpawnCount;
-        zombiesAlive = 0; //should fix too many zombies spawning
+        zombiesAlive = 0;
         zombiesSpawned = 0;
         zombiesKilled = 0;
-        // int runnersSpawned = 0;
 
         while(zombiesSpawned < currentZombiesToSpawn)
         {
@@ -37,13 +35,14 @@ public class ZombieSpawnManager : MonoBehaviour
                 GameObject newZombie = Instantiate(zombiePrefab, spawnPoint, Quaternion.identity);
                 newZombie.name = "Zombie " + zombiesSpawned; 
                 
-                if(Random.Range(0, 1f) > 0.8f && runningZombies) //20% chance the zombie will be a running zombie after round 5
+                if(Random.Range(0, 1f) > 0.5f && runningZombies) //50% chance the zombie will be a running zombie after round 5
                 {
                     newZombie.GetComponent<ZombieMovement>().running = true;
                     newZombie.name = "Running Zombie " + zombiesSpawned;
                 }
 
                 newZombie.GetComponent<ZombieHealth>().health = health;
+                
                 zombiesSpawned++;
                 zombiesAlive++;
                 // if(runnersSpawned < amountOfRunningZombies)
@@ -54,7 +53,6 @@ public class ZombieSpawnManager : MonoBehaviour
 
             yield return new WaitForSeconds(spawnRate);
         }
-        Debug.Log("Zombies Spawned: " + zombiesSpawned + "/" + currentZombiesToSpawn);
     }
 
     Vector3 GetOneOfFiveClosestSpawnPoints() //sorts through the spawnpoints by CURRENT distance to the player, and returns one of the 5 closest (at random) positions to avoid too many zombies spawning from the same place
@@ -88,20 +86,20 @@ public class ZombieSpawnManager : MonoBehaviour
         
         if(zombiesKilled >= currentZombiesToSpawn) //check if all zombies have spawned and all zombies are dead
         {
-            KillAllZombies(); //sometimes one or a few extra zombies are spawned. This way when the required amount of zombies are killed, any extras are destroyed.
+            KillAllZombies(); //sometimes one or a few extra zombies are spawned. I cannot figure out why. This way when the required amount of zombies are killed, any extras are destroyed.
             RoundManager.instance.RoundOver();
         }
     }
 
     public void KillAllZombies()
     {
-        ZombieHealth[] allZombies = FindObjectsOfType<ZombieHealth>();
+        ZombieHealth[] allZombies = Object.FindObjectsByType<ZombieHealth>(FindObjectsSortMode.None);
 
         if(allZombies.Length < 1) return;
 
         for(int i = 0; i < allZombies.Length; i++)
         {
-            Destroy(allZombies[i].gameObject);
+            allZombies[i].Die(true);
         }
     }
 

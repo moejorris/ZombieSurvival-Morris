@@ -45,8 +45,9 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [Header("Graphics")] //Optional
     [SerializeField] Transform muzzleFlashTransform; //The transform of the empty located at the end of the weapons barrel
     [SerializeField] GameObject muzzleFlashPrefab; //The prefab of the muzzle flash particle effect
+    [SerializeField] GameObject upgradedMuzzleFlashPrefab; //The prefab of the muzzle flash particle effect used when the gun is upgraded
     [SerializeField] GameObject impactEffectPrefab; //The prefab of the bullet impact particle effect
-    [SerializeField] GameObject bloodEffectPrefab;
+    [SerializeField] GameObject bloodEffectPrefab; //The prefab of the blood particle effect instantiated when hitting a zombie
 
     [Header("Audio")] //Optional sound effects for shooting and reloading.
     [SerializeField] AudioClip shootSound;
@@ -186,7 +187,14 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
         if(muzzleFlashPrefab != null && muzzleFlashTransform != null) //instantiate muzzle flash
         {
-            Instantiate(muzzleFlashPrefab, muzzleFlashTransform.position, muzzleFlashTransform.rotation);
+            if(isUpgraded && upgradedMuzzleFlashPrefab != null)
+            {
+                Instantiate(upgradedMuzzleFlashPrefab, muzzleFlashTransform.position, muzzleFlashTransform.rotation);
+            }
+            else
+            {
+                Instantiate(muzzleFlashPrefab, muzzleFlashTransform.position, muzzleFlashTransform.rotation);
+            }
         }
 
         weaponAnimator.SetTrigger("Shoot"); //play shoot animation
@@ -287,10 +295,10 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
                         UiController.instance.Invoke("SpawnHitmarker", 0.05f);
                     }
 
-                    if(bloodEffectPrefab != null && hits[i].point != null) //Instantiate bullet impact particle effect on hit object
+                    if(bloodEffectPrefab != null && hits[i].point != null && i < 1) //Instantiate bullet impact particle effect on hit object (only the first hit object)
                     {
-                        GameObject bulletImpact = Instantiate(impactEffectPrefab, hits[i].point, Quaternion.LookRotation(hits[i].normal), hits[i].transform);
-                        bulletImpact.transform.position = bulletImpact.transform.position + (bulletImpact.transform.forward * 0.1f); //slightly moves the PE outward from the surface so the bullet holes are visible
+                        GameObject bulletImpact = Instantiate(bloodEffectPrefab, hits[i].point, Quaternion.LookRotation(hits[i].normal));
+                        bulletImpact.transform.position = bulletImpact.transform.position + (bulletImpact.transform.forward * 0.2f); //slightly moves the PE outward from the surface so the bullet holes are visible
                     }
                 }
                 else //the first collision with a non-zombie stops the for loop so you can't shoot zombies through walls, only through zombies.

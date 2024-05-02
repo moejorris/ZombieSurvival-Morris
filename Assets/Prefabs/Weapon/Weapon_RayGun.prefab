@@ -190,13 +190,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5790918373598614475}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.0625, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4904025682033994150}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &6122861793597115804
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 7267135715694651094}
   - component: {fileID: 740309118786409530}
   - component: {fileID: 1529759385641117289}
+  - component: {fileID: 5553546514333727643}
   m_Layer: 0
   m_Name: Weapon_RayGun
   m_TagString: Untagged
@@ -362,32 +363,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reloadButton: 114
-  weaponAnimator: {fileID: 0}
-  audioSource: {fileID: 0}
+  weaponAnimator: {fileID: 5553546514333727643}
+  audioSource: {fileID: 1529759385641117289}
   unlimitedAmmo: 0
   clipSize: 20
   startingReserveMagazines: 8
   currentAmmo: 0
   currentReserveAmmo: 0
   fullAuto: 1
-  maxSpread: 10
-  aimSpreadMultiplier: 0.2
-  damageToInflict: 0
+  maxSpread: 0
+  aimSpreadMultiplier: 0
+  damageToInflict: 300
   maxDistance: 100
   shootableObjects:
     serializedVersion: 2
     m_Bits: 129
+  upgradedClipSizeMultiplier: 2
+  upgradedDamageMultiplier: 6
+  upgradedDistanceMultiplier: 3
+  upgradedSpreadMultiplier: 0.5
   muzzleFlashTransform: {fileID: 5581232101862121321}
-  muzzleFlashPrefab: {fileID: 0}
-  impactEffectPrefab: {fileID: 0}
-  shootSound: {fileID: 0}
-  reloadSound: {fileID: 0}
+  muzzleFlashPrefab: {fileID: 8541899381905024620, guid: 1b4ce92f0c8b3004a9d2c4b37a7bd315, type: 3}
+  upgradedMuzzleFlashPrefab: {fileID: 8541899381905024620, guid: 6762e8e06b5a9f9448ed8ac9e9f1456a, type: 3}
+  impactEffectPrefab: {fileID: 2888246986386797545, guid: 2c9dad5f48d6bcb4681a9ade2759a619, type: 3}
+  bloodEffectPrefab: {fileID: 2888246986386797545, guid: 8e99a9cd18960754ebdb55e0f9484cfb, type: 3}
+  shootSound: {fileID: 8300000, guid: 72c1aa3c44dd6f44ab8b4a27c68e5637, type: 3}
+  reloadSound: {fileID: 8300000, guid: 59a88a9a4eba596479a38896211aabc6, type: 3}
   weaponName: Ray Gun
   activeAmmoSprite: {fileID: 21300000, guid: bd2d857c2370bfc488184f31cdf5686d, type: 3}
   inactiveAmmoSprite: {fileID: 21300000, guid: 1209965bb5c2a3c4e8157d71a577419b, type: 3}
   displayModel: {fileID: 6795982501263671072}
   displaySpawnPoint: {x: 0, y: 0, z: 0}
   canShoot: 0
+  isUpgraded: 0
+  isAiming: 0
 --- !u!82 &1529759385641117289
 AudioSource:
   m_ObjectHideFlags: 0
@@ -484,3 +493,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &5553546514333727643
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8190336006335392918}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f61e9a5a190937940bdb093a686c2c68, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

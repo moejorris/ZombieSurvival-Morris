@@ -463,13 +463,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 129
   upgradedClipSizeMultiplier: 2
-  upgradedDamageMultiplier: 3
+  upgradedDamageMultiplier: 5
   upgradedDistanceMultiplier: 3
   upgradedSpreadMultiplier: 0.25
   muzzleFlashTransform: {fileID: 7984032111067056419}
   muzzleFlashPrefab: {fileID: 2888246986386797545, guid: a76ae19c69ef6214f8c6d716da5adcd9, type: 3}
+  upgradedMuzzleFlashPrefab: {fileID: 452469086329076803, guid: 43e70cf40f3fa8545bbffb57d32d176e, type: 3}
   impactEffectPrefab: {fileID: 2888246986386797545, guid: 2c9dad5f48d6bcb4681a9ade2759a619, type: 3}
-  bloodEffectPrefab: {fileID: 0}
+  bloodEffectPrefab: {fileID: 2888246986386797545, guid: 8e99a9cd18960754ebdb55e0f9484cfb, type: 3}
   shootSound: {fileID: 8300000, guid: 89642eebb6d9031429a992e4d77b46b0, type: 3}
   reloadSound: {fileID: 8300000, guid: b91a0546652633648a2faaff0c339287, type: 3}
   weaponName: MP-40

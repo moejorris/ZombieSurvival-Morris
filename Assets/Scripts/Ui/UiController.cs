@@ -35,6 +35,9 @@ public class UiController : MonoBehaviour
     [SerializeField] TextMeshProUGUI roundText;
     [SerializeField] TextMeshProUGUI zombiesLeftText;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI powerUpText;
+    [SerializeField] GameObject instaKillGraphic;
+    [SerializeField] GameObject doublePointsGraphic;
 
     void Awake()
     {
@@ -173,5 +176,50 @@ public class UiController : MonoBehaviour
     {
         scoreText.text = "Score: " + score;
     }
+
+    public void ShowPowerUpText(string powerUpName)
+    {
+        CancelInvoke("HidePowerUpText");
+
+        string message = powerUpName + " Picked Up!";
+
+        powerUpText.text = message;
+
+        Invoke("HidePowerUpText", 2);
+    }
+
+    void HidePowerUpText()
+    {
+        powerUpText.text = "";
+    }
+
+    public void ShowInstaKillGraphic(float powerUpDuration)
+    {
+        CancelInvoke("HideInstaKillGraphic");
+
+        instaKillGraphic.SetActive(true);
+
+        Invoke("HideInstaKillGraphic", powerUpDuration);
+    }
+    
+    void HideInstaKillGraphic()
+    {
+        instaKillGraphic.SetActive(false);
+    }
+
+    public void ShowDoublePointsGraphic(float powerUpDuration)
+    {
+        CancelInvoke("HideDoublePointsGraphic");
+
+        doublePointsGraphic.SetActive(true);
+
+        Invoke("HideDoublePointsGraphic", powerUpDuration);
+    }
+
+    void HideDoublePointsGraphic()
+    {
+        doublePointsGraphic.SetActive(false);
+    }
+
     #endregion
 }

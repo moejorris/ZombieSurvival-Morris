@@ -373,8 +373,9 @@ MonoBehaviour:
   upgradedSpreadMultiplier: 0.5
   muzzleFlashTransform: {fileID: 1526480958657693464}
   muzzleFlashPrefab: {fileID: 2888246986386797545, guid: 9b73d29013d0424478e3781fd8295a25, type: 3}
-  impactEffectPrefab: {fileID: 6259964822848909217, guid: fbc77231f29a9944cab1b3633dab81e7, type: 3}
-  bloodEffectPrefab: {fileID: 0}
+  upgradedMuzzleFlashPrefab: {fileID: 452469086329076803, guid: 43e70cf40f3fa8545bbffb57d32d176e, type: 3}
+  impactEffectPrefab: {fileID: 2888246986386797545, guid: 2c9dad5f48d6bcb4681a9ade2759a619, type: 3}
+  bloodEffectPrefab: {fileID: 2888246986386797545, guid: 8e99a9cd18960754ebdb55e0f9484cfb, type: 3}
   shootSound: {fileID: 8300000, guid: 9d2c45c3d51df7a498b756c99d8d8ab2, type: 3}
   reloadSound: {fileID: 8300000, guid: 0863bce5f56cac544a74e20331423e0d, type: 3}
   weaponName: Boomshot

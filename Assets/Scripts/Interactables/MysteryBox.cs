@@ -72,7 +72,9 @@ public class MysteryBox : InteractableObject
 
         for(int i = 0; i < currentWonderWeaponPool.Count; i++)
         {
-            if(PlayerWeaponManager.instance.CheckIfPlayerHasGun(currentWonderWeaponPool[i].GetComponent<PlayerGun>().GetWeaponName()) != -1)
+            string weaponName = currentWonderWeaponPool[i].GetComponent<PlayerGun>().GetWeaponName(); //gets the weapon name that is currently being checked against the weapon inventory
+
+            if(PlayerWeaponManager.instance.CheckIfPlayerHasGun(weaponName) != -1)
             {
                 Debug.Log("Player has this gun. removing " + currentWonderWeaponPool[i].name + " from pool");
                 currentWonderWeaponPool.Remove(currentWonderWeaponPool[i]);
@@ -81,7 +83,9 @@ public class MysteryBox : InteractableObject
 
         for(int i = 0; i < currentWeaponPool.Count; i++)
         {
-            if(PlayerWeaponManager.instance.CheckIfPlayerHasGun(currentWeaponPool[i].GetComponent<PlayerGun>().GetWeaponName()) != -1)
+            string weaponName = currentWonderWeaponPool[i].GetComponent<PlayerGun>().GetWeaponName(); //gets the weapon name that is currently being checked against the weapon inventory
+
+            if(PlayerWeaponManager.instance.CheckIfPlayerHasGun(weaponName) != -1)
             {
                 Debug.Log("Player has this gun. removing " + currentWeaponPool[i].name + " from pool");
                 currentWeaponPool.Remove(currentWeaponPool[i]);
@@ -91,7 +95,7 @@ public class MysteryBox : InteractableObject
         //decide if player gets a wonder weapon
         bool wonderWeapon = Random.Range(0f, 1f) > 0.9f; //90% chance of getting a wonder weapon (raygun only right now)
         //choose random weapon
-        if(wonderWeapon)
+        if(wonderWeapon && currentWonderWeaponPool.Count > 0) //checks if the player should receive a wonder weapon AND if they dont have any
         {
             weaponWon = currentWonderWeaponPool[Random.Range(0, currentWonderWeaponPool.Count)].GetComponent<PlayerGun>();
         }

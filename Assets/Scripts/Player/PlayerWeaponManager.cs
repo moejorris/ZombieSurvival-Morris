@@ -89,7 +89,10 @@ public class PlayerWeaponManager : MonoBehaviour
     {
         for(int i = 0; i < weaponInventory.Count; i++)
         {
-            weaponInventory[i].GetComponent<PlayerGun>().RefillReserveAmmo();
+            if(weaponInventory[i] != null)
+            {
+                weaponInventory[i].GetComponent<PlayerGun>().RefillReserveAmmo();
+            }
         }
     }
 
@@ -97,7 +100,7 @@ public class PlayerWeaponManager : MonoBehaviour
     {
         for(int i = 0; i < weaponInventory.Count; i++)
         {
-            if(weaponInventory[i] != null && weaponInventory[i].GetComponent<PlayerGun>().GetWeaponName() == weaponName)
+            if(weaponInventory[i] != null && weaponInventory[i].GetComponent<PlayerGun>().GetWeaponName().Contains(weaponName)) //uses contains() rather than == so it checks if the weapon the player has is upgraded (weapon name adds a suffix when it is upgraded)
             {
                 return i;
             }

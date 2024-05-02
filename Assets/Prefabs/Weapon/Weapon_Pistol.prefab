@@ -460,11 +460,12 @@ MonoBehaviour:
   upgradedSpreadMultiplier: 0.5
   muzzleFlashTransform: {fileID: 8617463445749611634}
   muzzleFlashPrefab: {fileID: 2888246986386797545, guid: a76ae19c69ef6214f8c6d716da5adcd9, type: 3}
+  upgradedMuzzleFlashPrefab: {fileID: 452469086329076803, guid: 43e70cf40f3fa8545bbffb57d32d176e, type: 3}
   impactEffectPrefab: {fileID: 2888246986386797545, guid: 2c9dad5f48d6bcb4681a9ade2759a619, type: 3}
-  bloodEffectPrefab: {fileID: 0}
+  bloodEffectPrefab: {fileID: 2888246986386797545, guid: 8e99a9cd18960754ebdb55e0f9484cfb, type: 3}
   shootSound: {fileID: 8300000, guid: 89642eebb6d9031429a992e4d77b46b0, type: 3}
   reloadSound: {fileID: 8300000, guid: f48c7478053fe7d4280e795ae0a6425f, type: 3}
-  weaponName: Pistol
+  weaponName: M1911
   activeAmmoSprite: {fileID: 21300000, guid: bd2d857c2370bfc488184f31cdf5686d, type: 3}
   inactiveAmmoSprite: {fileID: 21300000, guid: 1209965bb5c2a3c4e8157d71a577419b, type: 3}
   displayModel: {fileID: 920860107079602937}
