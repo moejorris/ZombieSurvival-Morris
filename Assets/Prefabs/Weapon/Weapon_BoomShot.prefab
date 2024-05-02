@@ -360,16 +360,21 @@ MonoBehaviour:
   currentAmmo: 0
   currentReserveAmmo: 0
   fullAuto: 0
-  maxSpread: 2
-  aimSpreadMultiplier: 0.1
-  damageToInflict: 50
+  maxSpread: 3
+  aimSpreadMultiplier: 0.5
+  damageToInflict: 200
   maxDistance: 10
   shootableObjects:
     serializedVersion: 2
     m_Bits: 129
+  upgradedClipSizeMultiplier: 2
+  upgradedDamageMultiplier: 10
+  upgradedDistanceMultiplier: 1.5
+  upgradedSpreadMultiplier: 0.5
   muzzleFlashTransform: {fileID: 1526480958657693464}
   muzzleFlashPrefab: {fileID: 2888246986386797545, guid: 9b73d29013d0424478e3781fd8295a25, type: 3}
   impactEffectPrefab: {fileID: 6259964822848909217, guid: fbc77231f29a9944cab1b3633dab81e7, type: 3}
+  bloodEffectPrefab: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 9d2c45c3d51df7a498b756c99d8d8ab2, type: 3}
   reloadSound: {fileID: 8300000, guid: 0863bce5f56cac544a74e20331423e0d, type: 3}
   weaponName: Boomshot
@@ -378,6 +383,8 @@ MonoBehaviour:
   displayModel: {fileID: 8801585554409665229}
   displaySpawnPoint: {x: 0, y: 0, z: -0.45}
   canShoot: 0
+  isUpgraded: 0
+  isAiming: 0
 --- !u!82 &271119159729685187
 AudioSource:
   m_ObjectHideFlags: 0

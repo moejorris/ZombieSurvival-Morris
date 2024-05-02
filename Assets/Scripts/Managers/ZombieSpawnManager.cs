@@ -33,7 +33,7 @@ public class ZombieSpawnManager : MonoBehaviour
         {
             if(zombiesAlive < maxZombiesAlive)
             {
-                Vector3 spawnPoint = GetOneOfThreeClosestSpawnPoints();
+                Vector3 spawnPoint = GetOneOfFiveClosestSpawnPoints();
                 GameObject newZombie = Instantiate(zombiePrefab, spawnPoint, Quaternion.identity);
                 newZombie.name = "Zombie " + zombiesSpawned; 
                 
@@ -57,7 +57,7 @@ public class ZombieSpawnManager : MonoBehaviour
         Debug.Log("Zombies Spawned: " + zombiesSpawned + "/" + currentZombiesToSpawn);
     }
 
-    Vector3 GetOneOfThreeClosestSpawnPoints() //sorts through the spawnpoints by CURRENT distance to the player, and returns one of the 3 closest (at random) positions
+    Vector3 GetOneOfFiveClosestSpawnPoints() //sorts through the spawnpoints by CURRENT distance to the player, and returns one of the 5 closest (at random) positions to avoid too many zombies spawning from the same place
     {
         //get all spawn points
         List<Transform> closestSpawnPoints = spawnPoints.ToList();
@@ -76,7 +76,7 @@ public class ZombieSpawnManager : MonoBehaviour
         //sort through list by closest to the player
         closestSpawnPoints.Sort(delegate (Transform t1, Transform t2) { return Vector3.Distance(playerPosition, t1.position).CompareTo(Vector3.Distance(playerPosition, t2.position)); });
         //return the position from index 0, 1, or 2 randomly. This way zombies are not only spawning at the closest spawn point.
-        return closestSpawnPoints[Random.Range(0, 3)].position;
+        return closestSpawnPoints[Random.Range(0, 5)].position;
     }
 
     public void CheckForRoundOver()

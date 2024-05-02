@@ -1387,14 +1387,19 @@ MonoBehaviour:
   fullAuto: 1
   maxSpread: 5
   aimSpreadMultiplier: 0.1
-  damageToInflict: 15
+  damageToInflict: 100
   maxDistance: 100
   shootableObjects:
     serializedVersion: 2
     m_Bits: 129
+  upgradedClipSizeMultiplier: 2
+  upgradedDamageMultiplier: 3
+  upgradedDistanceMultiplier: 3
+  upgradedSpreadMultiplier: 0.5
   muzzleFlashTransform: {fileID: 6185708126861144507}
   muzzleFlashPrefab: {fileID: 2888246986386797545, guid: a76ae19c69ef6214f8c6d716da5adcd9, type: 3}
   impactEffectPrefab: {fileID: 2888246986386797545, guid: 2c9dad5f48d6bcb4681a9ade2759a619, type: 3}
+  bloodEffectPrefab: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 89642eebb6d9031429a992e4d77b46b0, type: 3}
   reloadSound: {fileID: 8300000, guid: b91a0546652633648a2faaff0c339287, type: 3}
   weaponName: Assault Rife
@@ -1403,6 +1408,8 @@ MonoBehaviour:
   displayModel: {fileID: 5318588941700378073}
   displaySpawnPoint: {x: 0, y: 0, z: 0}
   canShoot: 0
+  isUpgraded: 0
+  isAiming: 0
 --- !u!82 &8934050991344559394
 AudioSource:
   m_ObjectHideFlags: 0

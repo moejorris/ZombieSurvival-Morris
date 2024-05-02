@@ -11,6 +11,9 @@ public class ZombieEntrance : InteractableObject
 
     [SerializeField] bool alreadyRunning;
 
+    [Header("Sound Effects")]
+    [SerializeField] AudioClip[] plankSounds;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +37,7 @@ public class ZombieEntrance : InteractableObject
         {
             if(planks[i].activeInHierarchy)
             {
+                GetComponent<AudioSource>().PlayOneShot(plankSounds[Random.Range(0, plankSounds.Length)]);
                 planks[i].SetActive(false);
                 NavMeshObstacleCheck();
                 Debug.Log("Removed Plank");

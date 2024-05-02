@@ -63,9 +63,9 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     // [SerializeField] UiAmmoController uiAmmoController; //Reference to the UiAmmoController to tell it when to update.
 
     [SerializeField] bool canShoot;
-    [SerializeField] bool isUpgraded;
+    public bool isUpgraded; //accessed by weapon upgrader script
     bool reloading;
-    public bool isAiming;
+    public bool isAiming; //accessed by FOV controller
     bool paused;
 
     public void Pause(bool isPaused)
@@ -229,7 +229,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     Vector3 DetermineBulletTrajectory()
     {
         float spread = maxSpread / 100f;
-        float curSpread = isUpgraded ? maxSpread * spread : spread;
+        float curSpread = isUpgraded ? upgradedSpreadMultiplier * spread : spread;
         float curAimSpread = isAiming ? aimSpreadMultiplier : 1;
 
         Vector3 bulletTrajectory = Camera.main.transform.forward;
@@ -385,6 +385,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
         currentAmmo = Mathf.FloorToInt(clipSize * upgradedClipSizeMultiplier);
         RefillReserveAmmo();
+        currentReserveAmmo *= 2;
 
         UpdateUi();
     }
