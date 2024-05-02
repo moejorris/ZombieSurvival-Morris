@@ -21,7 +21,7 @@ public class ZombieSpawnManager : MonoBehaviour
 
     //FIX MORE THAN TOLD ZOMBIES SPAWNING PER ROUND
     //CHECK IF ZOMBIES ARE SPAWNING IN TUNNEL BEFORE ROOM IS ACCESSIBLE
-    public IEnumerator SpawnZombies(float health, int targetSpawnCount, int maxZombiesAlive, float spawnRate, int amountOfRunningZombies)
+    public IEnumerator SpawnZombies(float health, int targetSpawnCount, int maxZombiesAlive, float spawnRate, bool runningZombies)
     {
         currentZombiesToSpawn = targetSpawnCount;
         zombiesAlive = 0; //should fix too many zombies spawning
@@ -37,6 +37,12 @@ public class ZombieSpawnManager : MonoBehaviour
                 GameObject newZombie = Instantiate(zombiePrefab, spawnPoint, Quaternion.identity);
                 newZombie.name = "Zombie " + zombiesSpawned; 
                 
+                if(Random.Range(0, 1f) > 0.8f && runningZombies) //20% chance the zombie will be a running zombie after round 5
+                {
+                    newZombie.GetComponent<ZombieMovement>().running = true;
+                    newZombie.name = "Running Zombie " + zombiesSpawned;
+                }
+
                 newZombie.GetComponent<ZombieHealth>().health = health;
                 zombiesSpawned++;
                 zombiesAlive++;
@@ -82,6 +88,7 @@ public class ZombieSpawnManager : MonoBehaviour
         
         if(zombiesKilled >= currentZombiesToSpawn) //check if all zombies have spawned and all zombies are dead
         {
+            KillAllZombies(); //sometimes one or a few extra zombies are spawned. This way when the required amount of zombies are killed, any extras are destroyed.
             RoundManager.instance.RoundOver();
         }
     }

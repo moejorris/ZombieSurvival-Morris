@@ -19,6 +19,7 @@ public class ZombieHealth : MonoBehaviour
     {
         Debug.Log("Death!");
         GetComponent<ZombieAttack>().OnDeath();
+        GetComponent<EnemySoundBank>().PlayDeathSound();
         ZombieSpawnManager.instance.CheckForRoundOver();
 
         // gameObject.SetActive(false);

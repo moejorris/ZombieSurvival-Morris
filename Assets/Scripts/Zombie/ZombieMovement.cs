@@ -14,13 +14,16 @@ public class ZombieMovement : MonoBehaviour
     [SerializeField] float runSpeed = 4.0f;
 
     ZombieState currentState;
-    ZombieState previousState;
+    ZombieState previousState = ZombieState.attack; //zombies are never attacking on spawn, this is done so when the zombies spawn they will always be playing a sound effect
 
     NavMeshAgent navMeshAgent;
     [SerializeField] Animator animator;
 
+    EnemySoundBank soundBank;
+
     void Awake()
     {
+        soundBank = GetComponent<EnemySoundBank>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         currentState = ZombieState.walk;
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -58,7 +61,6 @@ public class ZombieMovement : MonoBehaviour
         }
 
         HandleStates();
-
         previousState = currentState;
     }
 
@@ -86,10 +88,36 @@ public class ZombieMovement : MonoBehaviour
             break;
         }
         AnimatorUpdate();
+        HandleSounds();
+    }
+
+    void HandleSounds()
+    {
+        if(previousState != currentState)
+        {
+            if(currentState == ZombieState.idle || currentState == ZombieState.walk)
+            {
+                InvokeRepeating("TellSoundBankToPlayGroanSound", 0.5f, 5);
+            }
+            else if(currentState == ZombieState.run)
+            {
+                InvokeRepeating("TellSoundBankToPlayRunSound", 0.5f, 4);
+            }
+        }
     }
 
     void AnimatorUpdate()
     {
         animator.SetFloat("moveSpeed", navMeshAgent.velocity.magnitude);
+    }
+
+    void TellSoundBankToPlayGroanSound() //dummy functions for invoking
+    {
+        soundBank.PlayPatrolSound();
+    }
+
+    void TellSoundBankToPlayRunSound()
+    {
+        soundBank.PlayChaseSound();
     }
 }

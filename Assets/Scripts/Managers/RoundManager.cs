@@ -51,6 +51,8 @@ public class RoundManager : MonoBehaviour
 
     void BeginNextRound()
     {
+        CancelInvoke();
+        
         GetComponent<AudioSource>().PlayOneShot(roundStartSound);
 
         currentRound++;
@@ -83,7 +85,7 @@ public class RoundManager : MonoBehaviour
             }
         }
 
-        StartCoroutine(ZombieSpawnManager.instance.SpawnZombies(currentHealth, zombiesThisRound, maxNumberOfZombiesAliveAtOnce, currentSpawnRate, 0));
+        StartCoroutine(ZombieSpawnManager.instance.SpawnZombies(currentHealth, zombiesThisRound, maxNumberOfZombiesAliveAtOnce, currentSpawnRate, currentRound > 5));
         Debug.Log("Round " + currentRound + ": " + zombiesThisRound + " Zombies will spawn with " + currentHealth + " health with a spawn rate of " + currentSpawnRate + " seconds");
     }
 

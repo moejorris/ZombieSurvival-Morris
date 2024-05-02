@@ -18,7 +18,7 @@ public class ZombieAttack : MonoBehaviour
 
         if(other.GetComponent<ZombieEntrance>())
         {
-            if(other.GetComponent<ZombieEntrance>().BeginRemovingBarrier(this))
+            if(other.GetComponent<ZombieEntrance>().BeginRemovingBarrier(this)) //tells barrier when to start removing planks
             {
                 currentEntrance = other.GetComponent<ZombieEntrance>();
             }
@@ -35,14 +35,17 @@ public class ZombieAttack : MonoBehaviour
 
     void Attack()
     {
-        //play sound immediately
+        //play sound and animation immediately to warn player
+        GetComponent<EnemySoundBank>().PlayAttackSound();
+        GetComponent<Animator>().SetTrigger("Attack");
+
+        //damage player 0.3f seconds after
         Invoke("DamagePlayer", 0.3f);
     }
 
     void DamagePlayer()
     {
         PlayerHealth.instance.TakeDamage(damageToPlayer);
-        GetComponent<Animator>().SetTrigger("Attack");
     }
 
     public void OnDeath()
