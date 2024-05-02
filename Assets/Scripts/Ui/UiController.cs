@@ -156,8 +156,11 @@ public class UiController : MonoBehaviour
         reloadText.text = visible ? "Press R to Reload" : "";
     }
 
-    public void UpdateRoundText(int round)
+    public void UpdateRoundText(int round, Color color)
     {
+        if(color == null) color = Color.red; //cannot input a default value of Color.red in the parameters because it must be a compile time constant, which Color.red is not.
+
+        roundText.color = color;
         roundText.text = "Round " + round;
     }
 

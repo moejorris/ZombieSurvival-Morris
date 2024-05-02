@@ -1,4 +1,5 @@
 
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class RoundManager : MonoBehaviour
@@ -26,6 +27,7 @@ public class RoundManager : MonoBehaviour
     [SerializeField] AudioClip roundStartSound; 
     [SerializeField] AudioClip roundEndSound;
     
+    int zombiesThisRound = 0;
 
     void Awake()
     {
@@ -53,12 +55,11 @@ public class RoundManager : MonoBehaviour
 
         currentRound++;
 
-        UiController.instance.UpdateRoundText(currentRound);
+        Invoke("NewRoundTextUpdate", 3); //wait to updates the round after 3 seconds, which is when the "beat drops" in the round start sound effect
 
         //if the current round is past the max number of entries in the zombiesToSpawnPerRound array, then the max number of zombies to spawn each round will be used for the zombie count.
-        int zombiesThisRound = currentRound >= zombiesToSpawnPerRound.Length ? maxNumberOfZombiesToSpawnPerRound : zombiesToSpawnPerRound[currentRound];
+        zombiesThisRound = currentRound >= zombiesToSpawnPerRound.Length ? maxNumberOfZombiesToSpawnPerRound : zombiesToSpawnPerRound[currentRound];
         
-        UiController.instance.UpdateZombiesLeftText(zombiesThisRound);
 
         if(currentRound > 1)
         {
@@ -86,6 +87,12 @@ public class RoundManager : MonoBehaviour
         Debug.Log("Round " + currentRound + ": " + zombiesThisRound + " Zombies will spawn with " + currentHealth + " health with a spawn rate of " + currentSpawnRate + " seconds");
     }
 
+    void NewRoundTextUpdate()
+    {
+        UiController.instance.UpdateRoundText(currentRound, Color.red);
+        UiController.instance.UpdateZombiesLeftText(zombiesThisRound);
+    }
+
     public void RoundOver(bool endImmediately = false)
     {
         if(endImmediately)
@@ -93,6 +100,8 @@ public class RoundManager : MonoBehaviour
             BeginNextRound();
             return;
         }
+
+        UiController.instance.UpdateRoundText(currentRound, Color.white);
 
         GetComponent<AudioSource>().PlayOneShot(roundEndSound);
         float timeTilSFXOver = roundEndSound.length;

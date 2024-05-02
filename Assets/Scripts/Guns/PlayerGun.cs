@@ -7,12 +7,13 @@
 /////////////////////////////////////////////
 
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 public class PlayerGun : MonoBehaviour //This script is setup to work without Sound effects (audioClip and audioSource), Ui, and Particle Effects if they are not needed. 
 {
     public static PlayerGun currentGun;
 
-    //To do: make shooting run a coroutine/loop that shoots multiple raycasts when using weapons that fire multiple projectiles (like shotgun)
+    //To do: make shooting run a coroutine/loop that shoots multiple raycasts when using weapons that fire multiple projectiles (like shotgun). *Cancelled*
     [Header("Input")]
     [SerializeField] KeyCode reloadButton = KeyCode.R;
     
@@ -35,6 +36,12 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [SerializeField] float maxDistance; //the maximum amount of distance the weapon can shoot
     [SerializeField] LayerMask shootableObjects; //layermask of objects that can be shot
 
+    [Header("Upgraded Modifiers")]
+    [SerializeField] float upgradedClipSizeMultiplier = 1.2f;
+    [SerializeField] float upgradedDamageMultiplier = 2f;
+    [SerializeField] float upgradedDistanceMultiplier = 3f;
+    [SerializeField] float upgradedSpreadMultiplier = 0.5f;
+
     [Header("Graphics")] //Optional
     [SerializeField] Transform muzzleFlashTransform; //The transform of the empty located at the end of the weapons barrel
     [SerializeField] GameObject muzzleFlashPrefab; //The prefab of the muzzle flash particle effect
@@ -56,6 +63,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     // [SerializeField] UiAmmoController uiAmmoController; //Reference to the UiAmmoController to tell it when to update.
 
     [SerializeField] bool canShoot;
+    [SerializeField] bool isUpgraded;
     bool reloading;
     public bool isAiming;
     bool paused;
@@ -135,14 +143,16 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
     void UpdateUi()
     {
+        int currentClipSize = isUpgraded ? Mathf.FloorToInt(clipSize * upgradedClipSizeMultiplier) : clipSize; //determines whether or not should use base clip size or the upgraded clip size
+
         if(UiAmmoController.instance != null)
         {
-            UiAmmoController.instance.InitUi(weaponName, currentAmmo, clipSize, currentReserveAmmo, activeAmmoSprite, inactiveAmmoSprite);
+            UiAmmoController.instance.InitUi(weaponName, currentAmmo, currentClipSize, currentReserveAmmo, activeAmmoSprite, inactiveAmmoSprite);
         }
         if(UiController.instance != null)
         {
             // UiController.instance.ChangeCrosshairSprite(crosshair);
-            UiController.instance.ChangeCrosshairSize(maxSpread);
+            UiController.instance.ChangeCrosshairSize(isUpgraded ? upgradedSpreadMultiplier * maxSpread : maxSpread);
         }
     }
 
@@ -189,7 +199,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         ShootRaycastBulletPenetration();
     }
 
-    void ShootRaycast() //Shoots raycast from the center of the screen. If it hits anything, inflicts damage (if object has Health) and spawns the bullet impact effect on it.
+    void ShootRaycast() //No longer in use. ShootRaycastBulletPenetration() is now used in its place. Shoots raycast from the center of the screen. If it hits anything, inflicts damage (if object has Health) and spawns the bullet impact effect on it.
     {
         RaycastHit hit;
         Ray ray = new Ray(Camera.main.transform.position, DetermineBulletTrajectory());
@@ -218,7 +228,8 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
     Vector3 DetermineBulletTrajectory()
     {
-        float curSpread = maxSpread / 100f;
+        float spread = maxSpread / 100f;
+        float curSpread = isUpgraded ? maxSpread * spread : spread;
         float curAimSpread = isAiming ? aimSpreadMultiplier : 1;
 
         Vector3 bulletTrajectory = Camera.main.transform.forward;
@@ -237,11 +248,13 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         return bulletTrajectory;
     }
 
-    void ShootRaycastBulletPenetration() //Shoots raycast from the center of the screen. If it hits anything, inflicts damage (if object has Health) and spawns the bullet impact effect on it. Uses raycast all so your bullets can go through zombies.
+    void ShootRaycastBulletPenetration() //Shoots raycastAll from the center of the screen. If it hits anything, inflicts damage (if object has Health) and spawns the bullet impact effect on it. Uses raycast all so your bullets can go through zombies.
     {
         Ray ray = new Ray(Camera.main.transform.position, DetermineBulletTrajectory());
 
-        RaycastHit[] hits = Physics.RaycastAll(ray, maxDistance, shootableObjects, QueryTriggerInteraction.Ignore);
+        float bulletDistance = isUpgraded ? maxDistance * upgradedDistanceMultiplier : maxDistance;
+
+        RaycastHit[] hits = Physics.RaycastAll(ray, bulletDistance, shootableObjects, QueryTriggerInteraction.Ignore); //gets all objects the raycast hit
 
         Array.Sort(hits, delegate(RaycastHit hit1, RaycastHit hit2) //sorts through the list by distance (raycast all order is random/not sorted by default)
         {
@@ -249,9 +262,9 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         }
         );
         
-        if(hits.Length > 0) //maxDistance, shootableObjects, QueryTriggerInteraction.Ignore))
+        if(hits.Length > 0)
         {
-            float currentDamage = damageToInflict;
+            float currentDamage = isUpgraded ? damageToInflict * upgradedDamageMultiplier : damageToInflict;
 
             for(int i = 0; i < hits.Length; i++)
             {
@@ -293,7 +306,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         }
     }
 
-    void CanShoot() //Called by animations to signal to this script when the player can shoot or reload again.
+    void CanShoot() //Called by animations using animation events to signal to this script when the player can shoot or reload again. Called in Shooting and Reload animations toward the end of the animations.
     {
         canShoot = true;
         reloading = false;
@@ -301,7 +314,8 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
     void BeginReload() //Determines if it can begin reloading, and if so plays sound effect and plays animation.
     {
-        if(currentAmmo == clipSize || !canShoot || currentReserveAmmo <= 0)
+        int currentClipSize = isUpgraded ? Mathf.FloorToInt(clipSize * upgradedClipSizeMultiplier) : clipSize;
+        if(currentAmmo == currentClipSize || !canShoot || currentReserveAmmo <= 0)
         {
             return;
         }
@@ -316,9 +330,11 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         weaponAnimator.SetTrigger("Reload");
     }
 
-    void ReloadAmmo() //Called by reload animation, towards the end of the animation. Refills current ammo, and tells Ui to reflect that.
+    void ReloadAmmo() //Called by reload animation, using an animation event towards the end of the animation. Refills current ammo, and tells Ui to reflect that.
     {
-        int ammoDifferential = clipSize - currentAmmo; //how much ammo is required to fill the current magazine;
+        int currentClipSize = isUpgraded ? Mathf.FloorToInt(clipSize * upgradedClipSizeMultiplier) : clipSize; //determines whether or not should use base clip size or the upgraded clip size
+
+        int ammoDifferential = currentClipSize - currentAmmo; //how much ammo is required to fill the current magazine;
         if(currentReserveAmmo >= ammoDifferential)
         {
             currentAmmo += ammoDifferential;
@@ -335,12 +351,13 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         {
             UiAmmoController.instance.UpdateAmmo(currentAmmo, currentReserveAmmo);
         }
-        // weaponAnimator.SetTrigger("Up");
     }
 
     public bool CheckIfWeaponAtMaxAmmo()
     {
-        if(currentReserveAmmo == clipSize*startingReserveMagazines)
+        int currentClipSize = isUpgraded ? Mathf.FloorToInt(clipSize * upgradedClipSizeMultiplier) : clipSize; //determines whether or not should use base clip size or the upgraded clip size
+        
+        if(currentReserveAmmo == currentClipSize * startingReserveMagazines)
         {
             return true;
         }
@@ -349,7 +366,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
     public void RefillReserveAmmo()
     {
-        currentReserveAmmo = clipSize * startingReserveMagazines;
+        currentReserveAmmo = isUpgraded ? Mathf.FloorToInt(clipSize * upgradedClipSizeMultiplier) * startingReserveMagazines : clipSize * startingReserveMagazines;
         if(UiAmmoController.instance != null)
         {
             UiAmmoController.instance.UpdateAmmo(currentAmmo, currentReserveAmmo);
@@ -359,5 +376,16 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     public string GetWeaponName()
     {
         return weaponName;
+    }
+
+    public void UpgradeWeapon()
+    {
+        weaponName += " (Upgraded)";
+        isUpgraded = true;
+
+        currentAmmo = Mathf.FloorToInt(clipSize * upgradedClipSizeMultiplier);
+        RefillReserveAmmo();
+
+        UpdateUi();
     }
 }
