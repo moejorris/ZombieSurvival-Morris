@@ -27,6 +27,17 @@ public class PlayerDoor : InteractableObject
             }
         }
 
+        if(objectsToEnableOnInteract.Length >= 1)
+        {
+            for(int i = 0; i < objectsToEnableOnInteract.Length; i++)
+            {
+                if(objectsToEnableOnInteract[i] != null)
+                {
+                    objectsToEnableOnInteract[i].SetActive(true);
+                }
+            }
+        }
+
         Destroy(gameObject);
     }
 }

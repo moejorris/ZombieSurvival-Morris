@@ -269,8 +269,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
                 if(hits[i].collider.GetComponent<ZombieLimb>())
                 {
                     hits[i].collider.GetComponent<ZombieLimb>().TakeDamage(currentDamage);
-                    Debug.Log("Hit Zombie: " + hits[i].transform.name);
-                    if(UiController.instance != null) //&& i < 1
+                    if(UiController.instance != null && i < 1)
                     {
                         UiController.instance.Invoke("SpawnHitmarker", 0.05f);
                     }
@@ -288,7 +287,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
                         GameObject bulletImpact = Instantiate(impactEffectPrefab, hits[i].point, Quaternion.LookRotation(hits[i].normal), hits[i].transform);
                         bulletImpact.transform.position = bulletImpact.transform.position + (bulletImpact.transform.forward * 0.1f); //slightly moves the PE outward from the surface so the bullet holes are visible
                     }
-                    // return;
+                    return; //if a wall is hit, then the bullet stops there (the for loop stops and no other objects are hit or damaged)
                 }
             }
         }

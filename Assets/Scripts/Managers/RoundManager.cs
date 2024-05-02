@@ -37,6 +37,16 @@ public class RoundManager : MonoBehaviour
         Invoke("BeginNextRound", 1f);
     }
 
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            GetComponent<AudioSource>().Stop();
+            ZombieSpawnManager.instance.SkipRound();
+            GameManager.instance.PlayerScore(1000);
+        }
+    }
+
     void BeginNextRound()
     {
         GetComponent<AudioSource>().PlayOneShot(roundStartSound);
@@ -76,12 +86,18 @@ public class RoundManager : MonoBehaviour
         Debug.Log("Round " + currentRound + ": " + zombiesThisRound + " Zombies will spawn with " + currentHealth + " health with a spawn rate of " + currentSpawnRate + " seconds");
     }
 
-    public void RoundOver()
+    public void RoundOver(bool endImmediately = false)
     {
+        if(endImmediately)
+        {
+            BeginNextRound();
+            return;
+        }
+
         GetComponent<AudioSource>().PlayOneShot(roundEndSound);
         float timeTilSFXOver = roundEndSound.length;
 
-        Debug.Log("Round " + currentRound + " over. Round " + currentRound + 1 + " will begin in " + timeTilSFXOver + 1 + " seconds");
+        Debug.Log("Round " + currentRound + " over. Round " + (currentRound + 1) + " will begin in " + timeTilSFXOver + 1 + " seconds");
         Invoke("BeginNextRound", timeTilSFXOver + 1);
     }
 }

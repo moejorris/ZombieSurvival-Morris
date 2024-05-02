@@ -31,12 +31,10 @@ public class ZombieSpawnManager : MonoBehaviour
 
         while(zombiesSpawned < currentZombiesToSpawn)
         {
-            GameObject newZombie;
-
             if(zombiesAlive < maxZombiesAlive)
             {
                 Vector3 spawnPoint = GetOneOfThreeClosestSpawnPoints();
-                newZombie = Instantiate(zombiePrefab, spawnPoint, Quaternion.identity);
+                GameObject newZombie = Instantiate(zombiePrefab, spawnPoint, Quaternion.identity);
                 newZombie.name = "Zombie " + zombiesSpawned; 
                 
                 newZombie.GetComponent<ZombieHealth>().health = health;
@@ -48,9 +46,9 @@ public class ZombieSpawnManager : MonoBehaviour
                 // }
             }
 
-
             yield return new WaitForSeconds(spawnRate);
         }
+        Debug.Log("Zombies Spawned: " + zombiesSpawned + "/" + currentZombiesToSpawn);
     }
 
     Vector3 GetOneOfThreeClosestSpawnPoints() //sorts through the spawnpoints by CURRENT distance to the player, and returns one of the 3 closest (at random) positions
@@ -62,7 +60,7 @@ public class ZombieSpawnManager : MonoBehaviour
         {
             if(!closestSpawnPoints[i].gameObject.activeInHierarchy)
             {
-                Debug.Log(closestSpawnPoints[i].name);
+                // Debug.Log(closestSpawnPoints[i].name);
                 closestSpawnPoints.Remove(closestSpawnPoints[i]);
             }
         }
@@ -86,5 +84,27 @@ public class ZombieSpawnManager : MonoBehaviour
         {
             RoundManager.instance.RoundOver();
         }
+    }
+
+    public void KillAllZombies()
+    {
+        ZombieHealth[] allZombies = FindObjectsOfType<ZombieHealth>();
+
+        if(allZombies.Length < 1) return;
+
+        for(int i = 0; i < allZombies.Length; i++)
+        {
+            Destroy(allZombies[i].gameObject);
+        }
+    }
+
+    public void SkipRound()
+    {
+        KillAllZombies();
+        
+        StopCoroutine("SpawnZombies");
+        
+        UiController.instance.UpdateZombiesLeftText(currentZombiesToSpawn - zombiesKilled);
+        RoundManager.instance.RoundOver(true);
     }
 }
