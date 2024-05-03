@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UiController : MonoBehaviour
@@ -39,6 +40,10 @@ public class UiController : MonoBehaviour
     [SerializeField] GameObject instaKillGraphic;
     [SerializeField] GameObject doublePointsGraphic;
 
+    [Header("Game Over References")]
+    [SerializeField] GameObject gameOverPanel;
+    [SerializeField] TextMeshProUGUI roundsSurvivedText; //displays the amount of rounds survived on a game over
+
     void Awake()
     {
         instance = this;
@@ -52,6 +57,17 @@ public class UiController : MonoBehaviour
         }
 
         InitHealth();
+    }
+
+    public void GameOver(int roundsSurvived)
+    {
+        gameOverPanel.SetActive(true);
+        roundsSurvivedText.text = (roundsSurvived - 1) + " Rounds Survived"; //displays the amount of rounds survived (rounds that the player has lived through, so current rounds - 1)
+
+        if(pauseScreen.activeSelf)
+        {
+            pauseScreen.SetActive(false);
+        }
     }
 
     //pause menu functions were already apart of UP_JM_FPSController and can be ignored if you like.
@@ -92,6 +108,21 @@ public class UiController : MonoBehaviour
     public void OnClickResume()
     {
         PlayerManager.instance.PauseGame();
+    }
+
+    public void OnClickPlayAgain()
+    {
+        StartCoroutine(SceneSwitcher.instance.SwitchScenes(SceneManager.GetActiveScene().name, 2));
+    }
+
+    public void OnClickMenu()
+    {
+        StartCoroutine(SceneSwitcher.instance.SwitchScenes(mainMenuSceneName, 1));
+    }
+
+    public void OnClickQuit()
+    {
+        Application.Quit();
     }
 
     #endregion

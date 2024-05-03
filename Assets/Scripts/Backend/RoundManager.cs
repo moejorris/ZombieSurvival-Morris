@@ -7,6 +7,11 @@ public class RoundManager : MonoBehaviour
     public static RoundManager instance;
     [SerializeField] int currentRound = 0;
 
+    public int CurrentRound
+    {
+        get { return currentRound; }
+    }
+
     [Header("Zombie Health Parameters")]
     [SerializeField] float currentHealth = 150; //the current health of the zombies. Used as the starting value
     [SerializeField] int healthAdditionPerRound = 100; //how much health to add to zombies each round.

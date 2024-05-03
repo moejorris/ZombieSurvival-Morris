@@ -607,7 +607,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2334
+  m_VersionIndex: 2337
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -940,7 +940,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2062
+  m_VersionIndex: 2065
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1249,8 +1249,8 @@ MonoBehaviour:
   stayActiveAfterInteract: 1
   mustLookAt: 0
   holdInteractKey: 1
-  interactMessage: Press F to buy a random weapons
-  price: 0
+  interactMessage: Press F to...
+  price: 950
   buyMessage: Press and hold F to buy a random weapon for 950 points
   pickMessage: Press and hold F to trade weapons
   displayWeaponParent: {fileID: 8945954516290668858}

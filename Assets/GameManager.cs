@@ -23,12 +23,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerScore(int pointsReceived)
     {
-        if(doublePointsActive)
-        {
-            pointsReceived *= 2;
-        }
-
-        _playerScore += pointsReceived;
+        _playerScore += doublePointsActive ? 2 * pointsReceived : pointsReceived;
         UiController.instance.UpdateScoreText(_playerScore);
     }
 

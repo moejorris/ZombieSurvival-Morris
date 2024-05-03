@@ -112,4 +112,10 @@ public class ZombieSpawnManager : MonoBehaviour
         UiController.instance.UpdateZombiesLeftText(currentZombiesToSpawn - zombiesKilled);
         RoundManager.instance.RoundOver(true);
     }
+
+    public void PlayerDied()
+    {
+        StopAllCoroutines();
+        KillAllZombies();
+    }
 }

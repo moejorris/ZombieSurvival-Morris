@@ -10,7 +10,7 @@ public class MysteryBox : InteractableObject
     [SerializeField] Transform displayWeaponParent;
     [SerializeField] GameObject[] wonderWeaponPool;
     [SerializeField] GameObject[] weaponPool;
-    int weaponsToDisplay = 2;
+    int weaponsToDisplay = 2; //how many weapons to cycle through (graphical) before stopping and showing the weapon the player will receive
     PlayerGun weaponWon; //the weapon the player will actually receive.
     int buyPrice;
     bool cycleWeapons = false;
@@ -41,11 +41,11 @@ public class MysteryBox : InteractableObject
     public void StopCyclingWeaponModels()
     {
         cycleWeapons = false;
-        currentlyInteractable = true;
         interactMessage = pickMessage;
         price = 0;
         DestroyDisplayWeapons();
         ShowWeaponToBeGiven();
+        currentlyInteractable = true;
     }
 
     public void Done()
@@ -83,7 +83,7 @@ public class MysteryBox : InteractableObject
 
         for(int i = 0; i < currentWeaponPool.Count; i++)
         {
-            string weaponName = currentWonderWeaponPool[i].GetComponent<PlayerGun>().GetWeaponName(); //gets the weapon name that is currently being checked against the weapon inventory
+            string weaponName = currentWeaponPool[i].GetComponent<PlayerGun>().GetWeaponName(); //gets the weapon name that is currently being checked against the weapon inventory
 
             if(PlayerWeaponManager.instance.CheckIfPlayerHasGun(weaponName) != -1)
             {
@@ -93,7 +93,7 @@ public class MysteryBox : InteractableObject
         }
 
         //decide if player gets a wonder weapon
-        bool wonderWeapon = Random.Range(0f, 1f) > 0.9f; //90% chance of getting a wonder weapon (raygun only right now)
+        bool wonderWeapon = Random.Range(0f, 1f) > 0.95f; //5% chance of getting a wonder weapon (raygun only right now)
         //choose random weapon
         if(wonderWeapon && currentWonderWeaponPool.Count > 0) //checks if the player should receive a wonder weapon AND if they dont have any
         {

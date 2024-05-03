@@ -18,7 +18,7 @@ public class WeaponUpgrader : InteractableObject
         else
         {
             currentlyInteractable = true;
-            interactMessage = "Press and Hold F to upgrade " + PlayerGun.currentGun.GetWeaponName();
+            interactMessage = "Press and Hold F to upgrade " + PlayerGun.currentGun.GetWeaponName() + " for " + price + " points";
         }
     }
 }

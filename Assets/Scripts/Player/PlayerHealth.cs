@@ -47,5 +47,8 @@ public class PlayerHealth : Health //Player derivative of Health
     public override void Die() //Unlike traps, we don't want the player to be destroyed, we just want the game to end, so we override the inherited Die() function.
     {
         audioSource.PlayOneShot(deathSound);
+        ZombieSpawnManager.instance.PlayerDied();
+        PlayerManager.instance.PausePlayer(false);
+        UiController.instance.GameOver(RoundManager.instance.CurrentRound);
     }
 }

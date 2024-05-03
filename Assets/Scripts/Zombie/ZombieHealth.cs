@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ZombieHealth : MonoBehaviour
 {
+    [SerializeField] GameObject powerUpPrefab;
     [SerializeField] public float health = 100;
     [SerializeField] int pointsOnDeath = 50;
     public void TakeDamage(float damage)
@@ -34,6 +35,12 @@ public class ZombieHealth : MonoBehaviour
         
         //then the player receives 50 points for killing it
         GameManager.instance.PlayerScore(pointsOnDeath);
+
+        //decide if powerup spawns
+        if(Random.Range(0f, 1f) > 0.98f && !GetComponent<ZombieAttack>().canRemoveBarrier) //zombie must have entered playable area. 2% chance of dropping powerup
+        {
+            Instantiate(powerUpPrefab, transform.position, Quaternion.identity);
+        }
         
         //then it gets destroyed
         Destroy(gameObject);

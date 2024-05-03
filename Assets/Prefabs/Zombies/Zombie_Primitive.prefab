@@ -209,7 +209,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 187bcab938d5c8e4f93e77c2afb99833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpPrefab: {fileID: 2213209047554914158, guid: e1c3e069d78f57c4490ea245988104ac, type: 3}
   health: 150
+  pointsOnDeath: 50
 --- !u!114 &316603232067047572
 MonoBehaviour:
   m_ObjectHideFlags: 0

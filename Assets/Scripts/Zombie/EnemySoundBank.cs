@@ -58,9 +58,12 @@ public class EnemySoundBank : MonoBehaviour
     public void PlayDeathSound() //the death sound instantiates a game object so the sound plays after the zombie is destroyed. Sound is destroyed after it is finished playing
     {
         //instantiate empty gameobject with audio source and choose the death sound
-        GameObject deathSound = Instantiate(new GameObject("zombieDeathSound"), transform.position, Quaternion.identity);
+        GameObject deathSound = new GameObject("zombieDeathSounds");
         AudioSource deathAudioSource = deathSound.AddComponent<AudioSource>();
         AudioClip sound = deathSounds[Random.Range(0, deathSounds.Length)];
+        
+        //destroy object after sound effect plays
+        Destroy(deathSound, sound.length);
         
         //copy spatial audio sounds from this audio source
         deathAudioSource.spatialBlend = audioSource.spatialBlend;
@@ -69,7 +72,5 @@ public class EnemySoundBank : MonoBehaviour
         
         //play the death sound effect
         deathAudioSource.PlayOneShot(sound);
-        
-        Destroy(deathSound, sound.length);
     }
 }
