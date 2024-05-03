@@ -1,16 +1,16 @@
 //////////////////////////////////////////////
-//Assignment/Lab/Project: Blackjack Project
+//Assignment/Lab/Project: Zombie Survival
 //Name: Joe Morris
 //Section: SGD.213.0021
 //Instructor: Professor Locklear
-//Date: 03/04/2024
+//Date: 05/02/2024
 /////////////////////////////////////////////
 
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-// Re-used from Virtual Pet Game Project.
+// Re-used from Virtual Pet Game Project, Black jack, etc.
 //Rules Screen Manager class. Controls the Rules screen, by changing which page is currently active to simulate flipping through pages in a book.
 public class RuleScreenManager : MonoBehaviour
 {

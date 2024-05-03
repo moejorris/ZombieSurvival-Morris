@@ -1,11 +1,19 @@
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Zombie Survival
+//Name: Joe Morris
+//Section: SGD.213.0021
+//Instructor: Professor Locklear
+//Date: 05/02/2024
+/////////////////////////////////////////////
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.ProBuilder;
 
 public class ZombieSpawnManager : MonoBehaviour
 {
+    //Used by RoundManager, spawns zombies and controls their health, how many should spawn, how many zombies can be alive at once, and if a zombie should be a running zombie or not.
     public static ZombieSpawnManager instance;
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] GameObject zombiePrefab;
@@ -103,7 +111,7 @@ public class ZombieSpawnManager : MonoBehaviour
         }
     }
 
-    public void SkipRound()
+    public void SkipRound() //used when using the M key cheat code to skip rounds.
     {
         KillAllZombies();
         

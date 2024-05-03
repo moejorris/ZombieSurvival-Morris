@@ -1,3 +1,10 @@
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Zombie Survival
+//Name: Joe Morris
+//Section: SGD.213.0021
+//Instructor: Professor Locklear
+//Date: 05/02/2024
+/////////////////////////////////////////////
 
 using UnityEngine;
 using UnityEngine.AI;

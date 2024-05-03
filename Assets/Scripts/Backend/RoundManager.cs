@@ -1,9 +1,17 @@
 
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Zombie Survival
+//Name: Joe Morris
+//Section: SGD.213.0021
+//Instructor: Professor Locklear
+//Date: 05/02/2024
+/////////////////////////////////////////////
+
 using UnityEngine;
 
 public class RoundManager : MonoBehaviour
 {
+    //controls the rounds. Tells the zombie spawn manager the parameters for spawning them, and how much health they should have
     public static RoundManager instance;
     [SerializeField] int currentRound = 0;
 
@@ -46,7 +54,7 @@ public class RoundManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.M))
+        if(Input.GetKeyDown(KeyCode.M)) //cheat code to skip rounds. the current round is ended, a new round starts, and the player is given 1000 points. Not intended to be used for normal play purposes, only in testing/development purposes
         {
             GetComponent<AudioSource>().Stop();
             ZombieSpawnManager.instance.SkipRound();

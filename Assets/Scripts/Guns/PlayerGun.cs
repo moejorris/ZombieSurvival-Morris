@@ -1,5 +1,5 @@
 //////////////////////////////////////////////
-//Assignment/Lab/Project: Zombie Survival / Final Project
+//Assignment/Lab/Project: Zombie Survival
 //Name: Joe Morris
 //Section: SGD.213.0021
 //Instructor: Professor Locklear
@@ -36,7 +36,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [SerializeField] float maxDistance; //the maximum amount of distance the weapon can shoot
     [SerializeField] LayerMask shootableObjects; //layermask of objects that can be shot
 
-    [Header("Upgraded Modifiers")]
+    [Header("Upgraded Modifiers")] //Modifiers used when the player upgrades the weapon.
     [SerializeField] float upgradedClipSizeMultiplier = 1.2f;
     [SerializeField] float upgradedDamageMultiplier = 2f;
     [SerializeField] float upgradedDistanceMultiplier = 3f;
@@ -234,7 +234,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         }
     }
 
-    Vector3 DetermineBulletTrajectory()
+    Vector3 DetermineBulletTrajectory() //determines the bullet trajectory based on the weapons spread, and if the weapon is being aimed or not.
     {
         float spread = maxSpread / 100f;
         float curSpread = isUpgraded ? upgradedSpreadMultiplier * spread : spread;
@@ -361,7 +361,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         }
     }
 
-    public bool CheckIfWeaponAtMaxAmmo()
+    public bool CheckIfWeaponAtMaxAmmo() //called by interactable objects and weapon manager
     {
         int currentClipSize = isUpgraded ? Mathf.FloorToInt(clipSize * upgradedClipSizeMultiplier) : clipSize; //determines whether or not should use base clip size or the upgraded clip size
         
@@ -372,7 +372,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         return false;
     }
 
-    public void RefillReserveAmmo()
+    public void RefillReserveAmmo() //called by interactable objects and weapon manager
     {
         currentReserveAmmo = isUpgraded ? Mathf.FloorToInt(clipSize * upgradedClipSizeMultiplier) * startingReserveMagazines : clipSize * startingReserveMagazines;
         if(UiAmmoController.instance != null)

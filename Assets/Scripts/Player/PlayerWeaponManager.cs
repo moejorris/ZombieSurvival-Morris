@@ -1,9 +1,17 @@
-using System.Collections;
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Zombie Survival
+//Name: Joe Morris
+//Section: SGD.213.0021
+//Instructor: Professor Locklear
+//Date: 05/02/2024
+/////////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerWeaponManager : MonoBehaviour
 {
+    //Manages the weapons the player has, and allows the player to switch between them.
     public static PlayerWeaponManager instance;
     [SerializeField] Transform weaponHolderTransform;
     [SerializeField] List<GameObject> weaponInventory = new List<GameObject>();

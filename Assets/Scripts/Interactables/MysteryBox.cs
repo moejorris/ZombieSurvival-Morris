@@ -1,3 +1,11 @@
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Zombie Survival
+//Name: Joe Morris
+//Section: SGD.213.0021
+//Instructor: Professor Locklear
+//Date: 05/02/2024
+/////////////////////////////////////////////
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,6 +13,8 @@ using UnityEngine;
 
 public class MysteryBox : InteractableObject
 {
+    //When interactig, it cycles through various models of weapons to display, and then displays the weapon the player has won. The player can choose not to pick it up.
+    //This is also controlled by the mystery box's animator using animation events.
     [SerializeField] string buyMessage = "Press and hold F to buy a random weapon for 950 points";
     [SerializeField] string pickMessage = "Press and hold F to trade weapons";
     [SerializeField] Transform displayWeaponParent;

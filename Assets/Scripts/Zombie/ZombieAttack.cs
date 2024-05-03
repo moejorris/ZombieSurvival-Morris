@@ -1,9 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Zombie Survival
+//Name: Joe Morris
+//Section: SGD.213.0021
+//Instructor: Professor Locklear
+//Date: 05/02/2024
+/////////////////////////////////////////////
+
 using UnityEngine;
 
 public class ZombieAttack : MonoBehaviour
 {
+    //Controls the zombies attacks to the player and barriers.
     public bool canRemoveBarrier = true; //zombie can only remove barrier before entering the playable area.
     public float barrierRemovalRate = 2;
     [SerializeField] float damageToPlayer = 10;

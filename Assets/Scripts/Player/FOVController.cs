@@ -1,5 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Zombie Survival
+//Name: Joe Morris
+//Section: SGD.213.0021
+//Instructor: Professor Locklear
+//Date: 05/02/2024
+/////////////////////////////////////////////
+
+
 using UnityEngine;
 
 public class FOVController : MonoBehaviour
@@ -41,7 +48,7 @@ public class FOVController : MonoBehaviour
     void ChangeCamFov(float fov)
     {
         // float changeSmooth = Mathf.Lerp(viewCam.fieldOfView, fov, Time.deltaTime);
-        if(PlayerGun.currentGun.isAiming)
+        if(PlayerGun.currentGun.isAiming) //checks if the player is aiming, and if so reduces the FOV
         {
             fov *= adsFOVMultiplier;
 

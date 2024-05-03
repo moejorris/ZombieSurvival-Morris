@@ -1,12 +1,20 @@
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Zombie Survival
+//Name: Joe Morris
+//Section: SGD.213.0021
+//Instructor: Professor Locklear
+//Date: 05/02/2024
+/////////////////////////////////////////////
 
 using UnityEngine;
 
 public class ZombieHealth : MonoBehaviour
 {
+    //Health script for the zombies. 
     [SerializeField] GameObject powerUpPrefab;
     [SerializeField] public float health = 100;
     [SerializeField] int pointsOnDeath = 50;
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage) //Called by zombie limbs. 
     {
         if(GameManager.instance.instaKillActive)
         {

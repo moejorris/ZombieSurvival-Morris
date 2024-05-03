@@ -1,9 +1,9 @@
 //////////////////////////////////////////////
-//Assignment/Lab/Project: Basic AI Assignment
+//Assignment/Lab/Project: Zombie Survival
 //Name: Joe Morris
 //Section: SGD.213.0021
 //Instructor: Professor Locklear
-//Date: 04/17/2024
+//Date: 05/02/2024
 /////////////////////////////////////////////
 
 using System.Linq;

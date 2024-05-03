@@ -1,10 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Zombie Survival
+//Name: Joe Morris
+//Section: SGD.213.0021
+//Instructor: Professor Locklear
+//Date: 05/02/2024
+/////////////////////////////////////////////
+
 using UnityEngine;
 
 public class WallBuyWeapon : InteractableObject
 {
+    //holds a weapon for the player to buy off the wall. If the player has already bought the weapon, it allows them to buy ammo for it.
     [Header("Wallbuy Weapon")]
     string buyWeaponMessage;
     string refillWeaponMessage;

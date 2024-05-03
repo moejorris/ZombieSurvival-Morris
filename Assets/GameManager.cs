@@ -1,10 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Zombie Survival
+//Name: Joe Morris
+//Section: SGD.213.0021
+//Instructor: Professor Locklear
+//Date: 05/02/2024
+/////////////////////////////////////////////
+
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //Controls when player receives and loses points, as well as the powerups the player can pick up. Also tells the Ui Controller to reflect changes to points and powerups.
     public static GameManager instance;
     [SerializeField] int _playerScore;
     [SerializeField] float powerUpDuration = 30;

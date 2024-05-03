@@ -1,14 +1,14 @@
 //////////////////////////////////////////////
-//Assignment/Lab/Project: Collision Resolution
+//Assignment/Lab/Project: Zombie Survival
 //Name: Joe Morris
 //Section: SGD.213.0021
 //Instructor: Professor Locklear
-//Date: 03/18/2024
+//Date: 05/02/2024
 /////////////////////////////////////////////
 
 using UnityEngine;
 
-public class Health : MonoBehaviour //Parent to PlayerInteractions and Trap, as both objects have health that can be decremented.
+public class Health : MonoBehaviour //Parent to PlayerHealth
 {
     [SerializeField] protected float maxHealth, currentHealth; //So child classes can access it.
 

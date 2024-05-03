@@ -1,9 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Zombie Survival
+//Name: Joe Morris
+//Section: SGD.213.0021
+//Instructor: Professor Locklear
+//Date: 05/02/2024
+/////////////////////////////////////////////
+
 using UnityEngine;
 
 public class PlayerInteractionHandler : MonoBehaviour
 {
+    //Controls how the player interacts with interactable objects, like doors, weapon wall buys, mystery box, weapon upgrader.
     [SerializeField] KeyCode interactKey = KeyCode.F;
     [SerializeField] float keyHoldTime = 0.1f;
     [SerializeField] LayerMask interactableLayers;
