@@ -69,8 +69,9 @@ public class UiController : MonoBehaviour
 
     public void GameOver(int roundsSurvived)
     {
+        roundsSurvived--;
         gameOverPanel.SetActive(true);
-        roundsSurvivedText.text = (roundsSurvived - 1) + " Rounds Survived"; //displays the amount of rounds survived (rounds that the player has lived through, so current rounds - 1)
+        roundsSurvivedText.text = roundsSurvived + " Rounds Survived"; //displays the amount of rounds survived (rounds that the player has lived through, so current rounds - 1)
 
         if(pauseScreen.activeSelf)
         {

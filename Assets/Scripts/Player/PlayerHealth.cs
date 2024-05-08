@@ -58,5 +58,6 @@ public class PlayerHealth : Health //Player derivative of Health
         ZombieSpawnManager.instance.PlayerDied();
         PlayerManager.instance.PausePlayer(false);
         UiController.instance.GameOver(RoundManager.instance.CurrentRound);
+        Time.timeScale = 0;
     }
 }

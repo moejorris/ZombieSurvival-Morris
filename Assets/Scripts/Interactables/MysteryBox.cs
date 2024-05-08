@@ -32,6 +32,8 @@ public class MysteryBox : InteractableObject
     }
     public override void Interact()
     {
+        if(cycleWeapons) return;
+
         if(interactMessage == buyMessage)
         {
             GetComponent<AudioSource>().Play();
