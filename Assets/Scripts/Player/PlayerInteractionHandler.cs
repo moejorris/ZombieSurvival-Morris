@@ -74,6 +74,9 @@ public class PlayerInteractionHandler : MonoBehaviour
     {
         if(currentInteractable != null && canInteract)
         {
+            if(!currentInteractable.currentlyInteractable) return;
+
+            
             if(Input.GetKey(interactKey) && keyHeld == false)
             {
                 keyHeld = true;
