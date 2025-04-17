@@ -195,8 +195,14 @@ public class MysteryBox : InteractableObject
 
     IEnumerator CycleDisplayWeapons()
     {
-        PickDisplayWeapons();
+        if(cycleWeapons)
+        {
+            Debug.Log("CRASH CASE DETECTED! cycleWeapons already true when trying to start weapon cycle. Cancelling...");
+            yield break;
+        }
+        
         cycleWeapons = true;
+        PickDisplayWeapons();
         int i = 0;
         while(cycleWeapons == true)
         {

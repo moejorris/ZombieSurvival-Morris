@@ -111,6 +111,15 @@ public class ZombieSpawnManager : MonoBehaviour
         }
     }
 
+    public void StopRound()
+    {
+        KillAllZombies();
+        
+        StopCoroutine("SpawnZombies");
+        
+        UiController.instance.UpdateZombiesLeftText(currentZombiesToSpawn - zombiesKilled);
+    }
+
     public void SkipRound() //used when using the M key cheat code to skip rounds.
     {
         KillAllZombies();

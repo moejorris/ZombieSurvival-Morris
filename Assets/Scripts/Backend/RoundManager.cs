@@ -60,6 +60,14 @@ public class RoundManager : MonoBehaviour
             ZombieSpawnManager.instance.SkipRound();
             GameManager.instance.PlayerScore(1000);
         }
+        if(Input.GetKeyDown(KeyCode.Comma)) //cheat code to get money
+        {
+            GameManager.instance.PlayerScore(100000000);
+        }
+        if(Input.GetKeyDown(KeyCode.Period))
+        {
+            ZombieSpawnManager.instance.StopRound();
+        }
     }
 
     void BeginNextRound()
