@@ -3815,6 +3815,7 @@ MonoBehaviour:
   instaKillGraphic: {fileID: 567297195468925507}
   doublePointsGraphic: {fileID: 8355020703270255995}
   gameOverPanel: {fileID: 7469673773536481423}
+  roundsSurvivedText: {fileID: 0}
 --- !u!1 &5883577234603118504
 GameObject:
   m_ObjectHideFlags: 0

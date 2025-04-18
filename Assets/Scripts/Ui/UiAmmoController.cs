@@ -30,10 +30,22 @@ public class UiAmmoController : MonoBehaviour
         instance = this;
     }
 
-    public void InitUi(string weaponName, int currentAmmo, int clipSize, int currentReserveAmmo, Sprite activeSprite, Sprite inactiveSprite)
+    public void InitUi(string weaponName, int currentAmmo, int clipSize, int currentReserveAmmo, Sprite activeSprite, Sprite inactiveSprite, bool infiniteAmmo = false)
     {
         weaponText.text = weaponName;
         _maxAmmo = clipSize;
+
+        if(infiniteAmmo)
+        {
+            ammoCountText.gameObject.SetActive(false);
+            layoutGroupTransform.gameObject.SetActive(false);
+            return;
+        }
+        else
+        {
+            ammoCountText.gameObject.SetActive(true);
+            layoutGroupTransform.gameObject.SetActive(true);
+        }
 
         activeAmmoSprite = activeSprite;
         inactiveAmmoSprite = inactiveSprite;
@@ -52,6 +64,8 @@ public class UiAmmoController : MonoBehaviour
         }
 
         ammoCountText.text = "Ammo: " + currentAmmo + "/" + currentReserveAmmo;
+
+
     }
 
     public void UpdateAmmo(int currentAmmo, int currentReserveAmmo) //Updates the Ammo display.

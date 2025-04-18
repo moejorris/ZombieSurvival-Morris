@@ -7,7 +7,6 @@
 /////////////////////////////////////////////
 
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 public class PlayerGun : MonoBehaviour //This script is setup to work without Sound effects (audioClip and audioSource), Ui, and Particle Effects if they are not needed. 
 {
@@ -18,8 +17,8 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [SerializeField] KeyCode reloadButton = KeyCode.R;
     
     [Header("References")]
-    [SerializeField] Animator weaponAnimator;
-    [SerializeField] AudioSource audioSource; //Optional
+    [SerializeField] protected Animator weaponAnimator;
+    [SerializeField] protected AudioSource audioSource; //Optional
 
     [Header("Ammo Definitions")]
     [SerializeField] bool unlimitedAmmo; //does not use bullets when shooting/never has to reload
@@ -60,14 +59,14 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [Header("Wall Buy References")]
     [SerializeField] public GameObject displayModel;
     [SerializeField] public Vector3 displaySpawnPoint;
-    // [SerializeField] Sprite crosshair; crosshair is no longer controlled by weapon.
+    // [SerializeField] Sprite crosshair; //crosshair is no longer controlled by weapon.
     // [SerializeField] UiAmmoController uiAmmoController; //Reference to the UiAmmoController to tell it when to update.
 
-    [SerializeField] bool canShoot;
+    [SerializeField] protected bool canShoot;
     public bool isUpgraded; //accessed by weapon upgrader script
     bool reloading;
     public bool isAiming; //accessed by FOV controller
-    bool paused;
+    protected bool paused;
 
     public void Pause(bool isPaused)
     {
@@ -76,15 +75,14 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-
         currentAmmo = clipSize;
         currentReserveAmmo = clipSize * startingReserveMagazines;
         canShoot = false;
         UpdateUi();
     }
-    void OnEnable()
+    protected virtual void OnEnable()
     {
         currentGun = this;
         canShoot = false;
@@ -93,7 +91,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if(paused)
         {
@@ -148,7 +146,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
         if(UiAmmoController.instance != null)
         {
-            UiAmmoController.instance.InitUi(weaponName, currentAmmo, currentClipSize, currentReserveAmmo, activeAmmoSprite, inactiveAmmoSprite);
+            UiAmmoController.instance.InitUi(weaponName, currentAmmo, currentClipSize, currentReserveAmmo, activeAmmoSprite, inactiveAmmoSprite, unlimitedAmmo);
         }
         if(UiController.instance != null)
         {
@@ -157,7 +155,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         }
     }
 
-    void UpdateBounceAnimationSpeed()
+    protected void UpdateBounceAnimationSpeed()
     {
         Vector3 charControllerVelocity = GetComponentInParent<CharacterController>().velocity;
         Vector2 v2Speed = new Vector2(charControllerVelocity.x, charControllerVelocity.z);
@@ -165,7 +163,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         weaponAnimator.SetFloat("Speed", bounceSpeed);
     }
 
-    void ShootGun()
+    protected virtual void ShootGun()
     {
         if(currentAmmo <= 0) //Trying to shoot with no ammo will cause reload
         {
@@ -199,7 +197,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
 
         weaponAnimator.SetTrigger("Shoot"); //play shoot animation
 
-        if(UiAmmoController.instance != null) //update ammo in Ui
+        if(UiAmmoController.instance != null && !unlimitedAmmo) //update ammo in Ui
         {
             UiAmmoController.instance.UpdateAmmo(currentAmmo, currentReserveAmmo);
         }
@@ -207,7 +205,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         ShootRaycastBulletPenetration();
     }
 
-    void ShootRaycast() //No longer in use. ShootRaycastBulletPenetration() is now used in its place. Shoots raycast from the center of the screen. If it hits anything, inflicts damage (if object has Health) and spawns the bullet impact effect on it.
+    protected virtual void ShootRaycast() //No longer in use. ShootRaycastBulletPenetration() is now used in its place. Shoots raycast from the center of the screen. If it hits anything, inflicts damage (if object has Health) and spawns the bullet impact effect on it.
     {
         RaycastHit hit;
         Ray ray = new Ray(Camera.main.transform.position, DetermineBulletTrajectory());
@@ -256,7 +254,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         return bulletTrajectory;
     }
 
-    void ShootRaycastBulletPenetration() //Shoots raycastAll from the center of the screen. If it hits anything, inflicts damage (if object has Health) and spawns the bullet impact effect on it. Uses raycast all so your bullets can go through zombies.
+    protected virtual void ShootRaycastBulletPenetration() //Shoots raycastAll from the center of the screen. If it hits anything, inflicts damage (if object has Health) and spawns the bullet impact effect on it. Uses raycast all so your bullets can go through zombies.
     {
         Ray ray = new Ray(Camera.main.transform.position, DetermineBulletTrajectory());
 
@@ -386,7 +384,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
         return weaponName;
     }
 
-    public void UpgradeWeapon()
+    public virtual void UpgradeWeapon()
     {
         weaponName += " (Upgraded)";
         isUpgraded = true;
