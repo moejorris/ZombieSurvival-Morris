@@ -32,8 +32,8 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [SerializeField] float maxSpread = 2;
     [SerializeField] float aimSpreadMultiplier = 0.1f;
     [SerializeField] int damageToInflict; //how much damage the weapon will do
-    [SerializeField] float maxDistance; //the maximum amount of distance the weapon can shoot
-    [SerializeField] LayerMask shootableObjects; //layermask of objects that can be shot
+    [SerializeField] protected float maxDistance; //the maximum amount of distance the weapon can shoot
+    [SerializeField] protected LayerMask shootableObjects; //layermask of objects that can be shot
 
     [Header("Upgraded Modifiers")] //Modifiers used when the player upgrades the weapon.
     [SerializeField] float upgradedClipSizeMultiplier = 1.2f;
@@ -42,14 +42,14 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [SerializeField] float upgradedSpreadMultiplier = 0.5f;
 
     [Header("Graphics")] //Optional
-    [SerializeField] Transform muzzleFlashTransform; //The transform of the empty located at the end of the weapons barrel
-    [SerializeField] GameObject muzzleFlashPrefab; //The prefab of the muzzle flash particle effect
-    [SerializeField] GameObject upgradedMuzzleFlashPrefab; //The prefab of the muzzle flash particle effect used when the gun is upgraded
-    [SerializeField] GameObject impactEffectPrefab; //The prefab of the bullet impact particle effect
-    [SerializeField] GameObject bloodEffectPrefab; //The prefab of the blood particle effect instantiated when hitting a zombie
+    [SerializeField] protected Transform muzzleFlashTransform; //The transform of the empty located at the end of the weapons barrel
+    [SerializeField] protected GameObject muzzleFlashPrefab; //The prefab of the muzzle flash particle effect
+    [SerializeField] protected GameObject upgradedMuzzleFlashPrefab; //The prefab of the muzzle flash particle effect used when the gun is upgraded
+    [SerializeField] protected GameObject impactEffectPrefab; //The prefab of the bullet impact particle effect
+    [SerializeField] protected GameObject bloodEffectPrefab; //The prefab of the blood particle effect instantiated when hitting a zombie
 
     [Header("Audio")] //Optional sound effects for shooting and reloading.
-    [SerializeField] AudioClip shootSound;
+    [SerializeField] protected AudioClip shootSound;
     [SerializeField] AudioClip reloadSound;
 
     [Header("Ui")] //Optional
