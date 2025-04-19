@@ -34,6 +34,7 @@ public class WallBuyWeapon : InteractableObject
 
         GameObject displayWeapon = Instantiate(weapon.GetComponent<PlayerGun>().displayModel, transform.position, transform.rotation, transform);
         displayWeapon.transform.localPosition = weapon.GetComponent<PlayerGun>().displaySpawnPoint;
+        displayWeapon.transform.localEulerAngles = weapon.GetComponent<PlayerGun>().displayEulerAngles;
         
         displayWeapon.layer = 0; //take it out of WeaponCam layer so player cannot see it through walls.
         

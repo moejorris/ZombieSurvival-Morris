@@ -394,6 +394,7 @@ MonoBehaviour:
   inactiveAmmoSprite: {fileID: 21300000, guid: 1209965bb5c2a3c4e8157d71a577419b, type: 3}
   displayModel: {fileID: 6795982501263671072}
   displaySpawnPoint: {x: 0, y: 0, z: 0}
+  displayEulerAngles: {x: 0, y: -90, z: 0}
   canShoot: 0
   isUpgraded: 0
   isAiming: 0

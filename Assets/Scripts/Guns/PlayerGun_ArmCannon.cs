@@ -4,18 +4,27 @@ public class PlayerGun_ArmCannon : PlayerGun
 {
     bool shootButtonHeld;
     float shootButtonHoldTime = 0.5f;
-    float curChargeTime;
+    [SerializeField] float curChargeTime;
+
+    [Header("Upgraded Arm Cannon Settings")]
+    //?
 
     [Header("Power Beam Settings")]
+    [SerializeField] float beamSpeed = 12f;
     [SerializeField] GameObject beamProjectilePrefab;
     
     [Header("Charge Beam Settings")]
+    [SerializeField] GameObject chargeBeamProjectilePrefab;
+    [SerializeField] GameObject chargeStandInPrefab;
+    ChargeBeamStandIn spawnedChargeStandIn;
     [SerializeField] GameObject chargeParticle;
     [SerializeField] float chargeFullDamageMult = 2.25f;
-    [SerializeField] float fullChargeTime = 3f;
+    [SerializeField] float fullChargeTime = 1.5f;
+    [SerializeField] float chargeBeamSpeed = 25f;
 
     [Header("Missile Settings")]
     [SerializeField] GameObject missileProjectilePrefab;
+    [SerializeField] GameObject missileAOE;
     [SerializeField] int missileDamage;
     [SerializeField] float missileSpeed = 7f;
 
@@ -79,9 +88,10 @@ public class PlayerGun_ArmCannon : PlayerGun
             }
 
         }
-        else if(shootButtonHeld && curChargeTime > 0)
+        if(shootButtonHeld && curChargeTime > 0)
         {
-            curChargeTime = Mathf.Clamp(curChargeTime + Time.deltaTime * Time.timeScale, curChargeTime, fullChargeTime);
+            curChargeTime += Time.deltaTime * Time.timeScale;
+            if(curChargeTime > fullChargeTime) curChargeTime = fullChargeTime;
         }
         
         if(!Input.GetButton("Fire1"))
@@ -95,6 +105,7 @@ public class PlayerGun_ArmCannon : PlayerGun
             shootButtonHeld = false;
         }
 
+        UpdateChargeStandIn();
         UpdateBounceAnimationSpeed();
         UpdateChargeBlendTree();
     }
@@ -112,8 +123,24 @@ public class PlayerGun_ArmCannon : PlayerGun
         weaponAnimator.SetFloat("Charged", curChargeTime/fullChargeTime);
     }
 
+    void UpdateChargeStandIn()
+    {
+        if(!spawnedChargeStandIn) return;
+        else if(curChargeTime == 0) Destroy(spawnedChargeStandIn.gameObject);
+
+        float charged = curChargeTime / fullChargeTime;
+        charged = charged > 1 ? 1 : charged;
+
+        spawnedChargeStandIn.UpdateChargeAmount(charged);
+    }
+
     void StartChargeBeam()
     {
+        if(spawnedChargeStandIn) Destroy(spawnedChargeStandIn.gameObject);
+
+        spawnedChargeStandIn = Instantiate(chargeStandInPrefab, muzzleFlashTransform).GetComponent<ChargeBeamStandIn>();
+        // spawnedChargeStandIn.transform.localPosition = 
+
         beamChargeSource.enabled = true;
         beamChargeSource.clip = beamChargeStartSound;
         beamChargeSource.loop = false;
@@ -146,7 +173,24 @@ public class PlayerGun_ArmCannon : PlayerGun
         canShoot = false;
         Destroy(chargeParticleSpawned);
 
+        float chargeAmount = curChargeTime/fullChargeTime;
+        chargeAmount = chargeAmount > 1 ? chargeAmount = 1 : chargeAmount;
+
+        float damage = (damageToInflict * chargeFullDamageMult) * chargeAmount;
+        damage = Mathf.Clamp(damage, damageToInflict, damageToInflict * chargeFullDamageMult);
+
+        float speed = chargeBeamSpeed * chargeAmount;
+        speed = Mathf.Max(speed, beamSpeed);
+
+        Transform chargeTransform = ShootProjectile(chargeBeamProjectilePrefab, speed, damage, impactEffectPrefab).transform;
+        float scale = chargeAmount;
+        scale = Mathf.Max(scale, beamProjectilePrefab.transform.localScale.x * 2f);
+
+        chargeTransform.localScale = Vector3.one * scale * 0.5f;
+
         curChargeTime = 0;
+
+        Destroy(spawnedChargeStandIn.gameObject);
     }
 
     protected override void ShootGun()
@@ -162,7 +206,8 @@ public class PlayerGun_ArmCannon : PlayerGun
         {
             if(isUpgraded && upgradedMuzzleFlashPrefab != null)
             {
-                Instantiate(upgradedMuzzleFlashPrefab, muzzleFlashTransform.position, muzzleFlashTransform.rotation);
+                Transform laserTransform = Instantiate(upgradedMuzzleFlashPrefab, muzzleFlashTransform.position, muzzleFlashTransform.rotation).transform;
+                laserTransform.forward = GetProjectileDirection();
             }
             else
             {
@@ -172,7 +217,25 @@ public class PlayerGun_ArmCannon : PlayerGun
 
         weaponAnimator.SetTrigger("Shoot");
 
-        //Shoot Projectile
+        if(isUpgraded)
+        {
+            ShootRaycastBulletPenetration();
+        }
+        else
+        {
+            //Shoot Projectile
+            ShootProjectile(beamProjectilePrefab, beamSpeed, damageToInflict, impactEffectPrefab);
+        }
+    }
+
+    GameObject ShootProjectile(GameObject prefab, float speed, float damage, GameObject impactParticle = null, GameObject areaOfEffect = null)
+    {
+        if(isUpgraded) damage *= upgradedDamageMultiplier;
+
+        PlayerProjectile projectile = Instantiate(prefab, muzzleFlashTransform.position, Quaternion.identity).GetComponent<PlayerProjectile>();
+        projectile.InitProjectile(GetProjectileDirection(), speed, damage, impactParticle, bloodEffectPrefab, areaOfEffect);
+
+        return projectile.gameObject;
     }
 
     Vector3 GetProjectileDirection()
@@ -193,7 +256,7 @@ public class PlayerGun_ArmCannon : PlayerGun
         canShoot = false;
         audioSource.PlayOneShot(missileShootSound);
         weaponAnimator.SetTrigger("Shoot_Missile");
-        PlayerProjectile missile = Instantiate(missileProjectilePrefab, muzzleFlashTransform.position, Quaternion.identity).GetComponent<PlayerProjectile>();
-        missile.InitProjectile(GetProjectileDirection(), missileSpeed, missileDamage);
+
+        ShootProjectile(missileProjectilePrefab, missileSpeed, missileDamage, impactEffectPrefab, missileAOE);
     }
 }

@@ -14,8 +14,11 @@ public class ZombieHealth : MonoBehaviour
     [SerializeField] GameObject powerUpPrefab;
     [SerializeField] public float health = 100;
     [SerializeField] int pointsOnDeath = 50;
+
+    bool dead = false;
     public void TakeDamage(float damage) //Called by zombie limbs. 
     {
+        if(dead ) return;
         if(GameManager.instance.instaKillActive)
         {
             damage = health;
@@ -24,6 +27,7 @@ public class ZombieHealth : MonoBehaviour
         health -= damage;
         if(health <= 0)
         {
+            dead = true;
             Die();
         }
     }

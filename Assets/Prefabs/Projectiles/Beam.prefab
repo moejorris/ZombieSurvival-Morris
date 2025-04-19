@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5343522979404150538}
   - component: {fileID: 4949235487709581318}
   m_Layer: 0
-  m_Name: Missile
+  m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,10 +33,9 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -33.017742, y: 10.631464, z: 9.0151615}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1924220038669625186}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4352106915583577741
@@ -67,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: bd799e3748e894747baebf5ba4f77dd8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -218,9 +217,9 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.596, b: 1, a: 0.43529412}
-      key1: {r: 0, g: 0, b: 1, a: 0.27450982}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 1, b: 0.567, a: 0.43529412}
+      key1: {r: 1, g: 1, b: 0, a: 0.19215687}
+      key2: {r: 0, g: 0, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -228,7 +227,7 @@ TrailRenderer:
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
       ctime1: 13707
-      ctime2: 0
+      ctime2: 13915
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -302,7 +301,7 @@ Light:
       e33: 1
     m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
-  m_DrawHalo: 1
+  m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
@@ -320,129 +319,3 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1001 &6799688201296293578
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6903861162207609314}
-    m_Modifications:
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: moveWithTransform
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: RotationModule.enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: TrailModule.worldSpace
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: VelocityModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: TrailModule.lifetime.scalar
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: VelocityModule.inWorldSpace
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: InheritVelocityModule.enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: TrailModule.generateLightingData
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: InitialModule.startRotation.scalar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: InitialModule.randomizeRotationDirection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: TrailModule.colorOverTrail.maxGradient.atime1
-      value: 39746
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: TrailModule.colorOverTrail.maxGradient.atime2
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: TrailModule.colorOverTrail.maxGradient.ctime1
-      value: 18706
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: TrailModule.colorOverTrail.maxGradient.key1.a
-      value: 0.0038143396
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: TrailModule.colorOverTrail.maxGradient.key1.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414576295803673441, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: TrailModule.colorOverTrail.maxGradient.m_NumAlphaKeys
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965618307542108584, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965618307542108584, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965618307542108584, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965618307542108584, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965618307542108584, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965618307542108584, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965618307542108584, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965618307542108584, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965618307542108584, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4965618307542108584, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6524824189004215597, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-      propertyPath: m_Name
-      value: PS_MissileSpiral
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
---- !u!4 &1924220038669625186 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4965618307542108584, guid: a5648d2fd16ee2c4d8452066c1c6de4e, type: 3}
-  m_PrefabInstance: {fileID: 6799688201296293578}
-  m_PrefabAsset: {fileID: 0}

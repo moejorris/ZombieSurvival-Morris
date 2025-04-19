@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 8137603496469882041}
   - component: {fileID: 2636464334260749521}
   m_Layer: 6
-  m_Name: ChargeBeamParticle
+  m_Name: ChargeBeamParticle_OLD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -31,15 +31,15 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [SerializeField] bool fullAuto;
     [SerializeField] float maxSpread = 2;
     [SerializeField] float aimSpreadMultiplier = 0.1f;
-    [SerializeField] int damageToInflict; //how much damage the weapon will do
+    [SerializeField] protected int damageToInflict; //how much damage the weapon will do
     [SerializeField] protected float maxDistance; //the maximum amount of distance the weapon can shoot
     [SerializeField] protected LayerMask shootableObjects; //layermask of objects that can be shot
 
     [Header("Upgraded Modifiers")] //Modifiers used when the player upgrades the weapon.
-    [SerializeField] float upgradedClipSizeMultiplier = 1.2f;
-    [SerializeField] float upgradedDamageMultiplier = 2f;
-    [SerializeField] float upgradedDistanceMultiplier = 3f;
-    [SerializeField] float upgradedSpreadMultiplier = 0.5f;
+    [SerializeField] protected float upgradedClipSizeMultiplier = 1.2f;
+    [SerializeField] protected float upgradedDamageMultiplier = 2f;
+    [SerializeField] protected float upgradedDistanceMultiplier = 3f;
+    [SerializeField] protected float upgradedSpreadMultiplier = 0.5f;
 
     [Header("Graphics")] //Optional
     [SerializeField] protected Transform muzzleFlashTransform; //The transform of the empty located at the end of the weapons barrel
@@ -59,6 +59,7 @@ public class PlayerGun : MonoBehaviour //This script is setup to work without So
     [Header("Wall Buy References")]
     [SerializeField] public GameObject displayModel;
     [SerializeField] public Vector3 displaySpawnPoint;
+    [SerializeField] public Vector3 displayEulerAngles;
     // [SerializeField] Sprite crosshair; //crosshair is no longer controlled by weapon.
     // [SerializeField] UiAmmoController uiAmmoController; //Reference to the UiAmmoController to tell it when to update.
 
