@@ -37636,8 +37636,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117105672}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 42.4, y: -10.66015, z: -3.6351862}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.0000002533197}
+  m_LocalPosition: {x: 45, y: 9, z: 10.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -37645,8 +37645,8 @@ Transform:
   - {fileID: 788444525}
   - {fileID: 1637228210}
   - {fileID: 277160779}
-  m_Father: {fileID: 2111283683}
-  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!65 &1117105674
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -37685,7 +37685,7 @@ MonoBehaviour:
   mustLookAt: 1
   holdInteractKey: 1
   interactMessage: Press and hold F to buy
-  price: 0
+  price: 10000
   refillAmmoPrice: 0
   weapon: {fileID: 1859941025248056803, guid: 5e1304dbf467ec74492a5b6fc64a5504, type: 3}
 --- !u!1 &1128914051
@@ -61175,7 +61175,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5779263063808223354}
-  - {fileID: 1117105673}
   - {fileID: 511040169}
   - {fileID: 5779263061766268313}
   m_Father: {fileID: 1732032898}
@@ -63312,6 +63311,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MysteryBox
       objectReference: {fileID: 0}
+    - target: {fileID: 6839175060951853882, guid: c2fd3edc2d96b734e80cea7021d98008, type: 3}
+      propertyPath: wonderWeaponPool.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6839175060951853882, guid: c2fd3edc2d96b734e80cea7021d98008, type: 3}
+      propertyPath: wonderWeaponPool.Array.data[1]
+      value: 
+      objectReference: {fileID: 1859941025248056803, guid: 5e1304dbf467ec74492a5b6fc64a5504, type: 3}
     - target: {fileID: 8407071704199978328, guid: c2fd3edc2d96b734e80cea7021d98008, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -64654,3 +64661,4 @@ SceneRoots:
   - {fileID: 159763138}
   - {fileID: 550512703}
   - {fileID: 696460189080486416}
+  - {fileID: 1117105673}

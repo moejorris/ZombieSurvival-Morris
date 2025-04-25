@@ -105,7 +105,7 @@ public class MysteryBox : InteractableObject
         }
 
         //decide if player gets a wonder weapon
-        bool wonderWeapon = Random.Range(0f, 1f) > 0.95f; //5% chance of getting a wonder weapon (raygun only right now)
+        bool wonderWeapon = Random.Range(0f, 1f) > 0.85f; //15% chance of getting a wonder weapon (raygun only right now)
         //choose random weapon
         if(wonderWeapon && currentWonderWeaponPool.Count > 0) //checks if the player should receive a wonder weapon AND if they dont have any
         {

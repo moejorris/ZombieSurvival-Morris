@@ -1129,18 +1129,18 @@ MonoBehaviour:
   isUpgraded: 0
   isAiming: 0
   curChargeTime: 0
-  beamSpeed: 12
+  beamSpeed: 30
   beamProjectilePrefab: {fileID: 6759658696201524451, guid: 6cf3d785f73cbd44eaa8afba8b812b91, type: 3}
   chargeBeamProjectilePrefab: {fileID: 6759658696201524451, guid: 78d0c28abccc5db47a887abd0a679ac5, type: 3}
   chargeStandInPrefab: {fileID: 627582373556610818, guid: eda84f22ade2fd5439498223d388bfa3, type: 3}
   chargeParticle: {fileID: 2021919260869848815, guid: 5be44b4429cb4df42a4c3cef5a8e13c0, type: 3}
   chargeFullDamageMult: 2.25
   fullChargeTime: 1.5
-  chargeBeamSpeed: 25
+  chargeBeamSpeed: 30
   missileProjectilePrefab: {fileID: 6759658696201524451, guid: 7984b26ae02ace941951f18c97ec9039, type: 3}
   missileAOE: {fileID: 7292756523651693965, guid: 87fa87a582d115e49a48c5a65e8ba290, type: 3}
   missileDamage: 600
-  missileSpeed: 12
+  missileSpeed: 20
   pickUpSound: {fileID: 8300000, guid: 3e5801b32f9c9b544b3633503dbb2b07, type: 3}
   equipSound: {fileID: 8300000, guid: 0d17c8cebedbff5419ba8c6eb312e5e8, type: 3}
   beamChargeStartSound: {fileID: 8300000, guid: ae321ace12809f1419df90c8481e6f22, type: 3}

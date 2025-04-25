@@ -31,6 +31,8 @@ public class WallBuyWeapon : InteractableObject
         weaponName = weapon.GetComponent<PlayerGun>().GetWeaponName();
         buyWeaponMessage = "Press and hold F to buy " + weaponName + " for " + buyPrice + " points";
         refillWeaponMessage = "Press and hold F to buy " + weaponName + " ammo for " + refillAmmoPrice + " points";
+        if(refillAmmoPrice == 0) refillWeaponMessage = "";
+
 
         GameObject displayWeapon = Instantiate(weapon.GetComponent<PlayerGun>().displayModel, transform.position, transform.rotation, transform);
         displayWeapon.transform.localPosition = weapon.GetComponent<PlayerGun>().displaySpawnPoint;
@@ -60,7 +62,7 @@ public class WallBuyWeapon : InteractableObject
         {
             player.GainWeapon(weapon);
         }
-        else if(price == refillAmmoPrice)
+        else if(price == refillAmmoPrice && refillAmmoPrice > 0)
         {
             player.RefillWeaponAmmo(slotPlayerHasWeapon);
         }
