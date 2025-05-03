@@ -17598,6 +17598,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 806326254}
     m_Modifications:
+    - target: {fileID: 2889512746367937018, guid: 1ae761261b814c748954de35b4ba3414, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5008285417749403964, guid: 1ae761261b814c748954de35b4ba3414, type: 3}
       propertyPath: m_Name
       value: ZombieEntrance
