@@ -46470,6 +46470,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3035005788937775924, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3560951231260935781, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3564021424305596949, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
       propertyPath: roundsSurvivedText
       value: 
@@ -46490,6 +46498,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -78.78337
       objectReference: {fileID: 0}
+    - target: {fileID: 4843609773816541137, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5115107549424433947, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174037476373595137, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5741785625900266200, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
       propertyPath: m_Name
       value: UiCanvas_Controller
@@ -46505,6 +46525,18 @@ PrefabInstance:
     - target: {fileID: 6155726860392842332, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UiController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6227222405293426366, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236308053726650758, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7446130202246223265, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7469673773536481423, guid: d44f399b1c41d4d4e816f52a762b4ba3, type: 3}
       propertyPath: m_IsActive
@@ -61602,6 +61634,10 @@ PrefabInstance:
     - target: {fileID: 4994580642403818995, guid: 775a51a786bfdea408b9590a6eb333f8, type: 3}
       propertyPath: m_Name
       value: SceneSwitcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 4994580642403818995, guid: 775a51a786bfdea408b9590a6eb333f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6262865702968146013, guid: 775a51a786bfdea408b9590a6eb333f8, type: 3}
       propertyPath: m_BlocksRaycasts
