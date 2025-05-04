@@ -3,14 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Joe Morris | Zombie Survival</title>
+    <title>Unity WebGL Player | Zombie Survival</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <!-- <h4 style="text-align:center;">This may take a long time to load, please be patient.</h4> -->
-      <canvas id="unity-canvas" width=960 height=540 tabindex="-1"></canvas>
+      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -60,13 +59,13 @@
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/ZombieSurvival_1.51_WGL.loader.js";
       var config = {
-        dataUrl: buildUrl + "/ZombieSurvival_1.51_WGL.data.gz",
-        frameworkUrl: buildUrl + "/ZombieSurvival_1.51_WGL.framework.js.gz",
-        codeUrl: buildUrl + "/ZombieSurvival_1.51_WGL.wasm.gz",
+        dataUrl: buildUrl + "/ZombieSurvival_1.51_WGL.data",
+        frameworkUrl: buildUrl + "/ZombieSurvival_1.51_WGL.framework.js",
+        codeUrl: buildUrl + "/ZombieSurvival_1.51_WGL.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Joe Morris",
         productName: "Zombie Survival",
-        productVersion: "1.51 WebGL",
+        productVersion: "1.51",
         showBanner: unityShowBanner,
       };
 
@@ -96,7 +95,7 @@
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
         canvas.style.width = "960px";
-        canvas.style.height = "540px";
+        canvas.style.height = "600px";
       }
 
       loadingBar.style.display = "block";
